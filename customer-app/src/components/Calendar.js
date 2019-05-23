@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
-import Moment from "react-moment";
 import "moment-timezone";
+
+const server = "localhost:5000";
 
 class Calendar extends Component {
   constructor(props) {
@@ -17,64 +18,78 @@ class Calendar extends Component {
   displayCalendar = () => {};
 
   handleSelect = e => {
-    console.log(e);
+    // Returns a date object
+    let chosenDate = new Date(e);
+    let d = chosenDate.getDate();
+    // = currentmonth - 1
+    let m = chosenDate.getMonth();
+    let y = chosenDate.getFullYear();
+
     // Pass in the date
     axios
-      .get(
-        `https://insta.nextacademy.com/api/v1/images/?userId=${
-          this.props.userId
-        }`
-      )
+      .get(`http://${server}/api/v1/timeslots/show?d=${d}&m=${m}&y=${y}`)
+
       .then(result => {
-        this.setState({ slotsTaken: result.slots });
+        let slotsTaken = result.data.slotsTaken.map(slot => {
+          return new Date(slot);
+        });
+        console.log(slotsTaken);
+        this.setState({
+          slotsTaken: [...slotsTaken]
+        });
       })
       .catch(error => {
         console.log(`ERROR: ${error}`);
       });
 
-    this.setState({
-      selectedDate: e,
-      slotsTaken: [
-        new Date("Thu May 23 2019 13:30:00 GMT+0800 (Malaysia Time)")
-      ]
-    });
     console.log(this.state);
-    // Get the date that has been chosen e.target.value
-    // Make a call to the database with the date
-    // Server should return all the time slots in an array
-    // Get all the time slots that are taken, setState
-    //
   };
-
   handleChange = e => {
-    console.log(e);
     this.setState({
       selectedDate: e
-      // Get the selected timeslot,
-      // send it to db
     });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(e);
+    console.log(this.state.selectedDate);
+    let timeSlot = new Date(this.state.selectedDate);
+    console.log(timeSlot);
+    axios
+      .post(`http://${server}/api/v1/orders/create`, {
+        timeSlot: timeSlot,
+        test: "test"
+      })
+      .then(response => {
+        console.log(response);
+      });
   };
 
   render() {
     // Date field on click should display calendar
     // After a date has been chosen, a call should be made to check availabilities
     // Time field should render and appear with timings disabled
-    const { slotsTaken, today } = this.state;
+    const { slotsTaken } = this.state;
     return (
       <>
-        <DatePicker
-          selected={this.state.selectedDate}
-          onSelect={this.handleSelect} //when day is clicked
-          onChange={this.handleChange}
-          dateFormat="MMMM d, yyyy h:mm aa"
-          timeFormat="HH:mm"
-          showTimeSelect
-          timeIntervals={15}
-          minDate={new Date()}
-          excludeTimes={slotsTaken}
-          placeholderText={"Select a date"}
-          timeCaption="Time"
-        />
+        <form onSubmit={this.handleSubmit}>
+          <DatePicker
+            selected={this.state.selectedDate}
+            onSelect={this.handleSelect} //when day is clicked
+            onChange={this.handleChange}
+            dateFormat="MMMM d, yyyy h:mm aa"
+            timeFormat="HH:mm"
+            showTimeSelect
+            timeIntervals={15}
+            minDate={new Date()}
+            excludeTimes={slotsTaken}
+            placeholderText={"Select a date"}
+            timeCaption="Time"
+            className="w-200px text-center"
+          />
+          <button type="submit" />
+        </form>
       </>
     );
   }
