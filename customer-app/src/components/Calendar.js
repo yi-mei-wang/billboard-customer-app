@@ -15,8 +15,6 @@ class Calendar extends Component {
     };
   }
 
-  displayCalendar = () => {};
-
   handleSelect = e => {
     // Returns a date object
     let chosenDate = new Date(e);
@@ -41,9 +39,8 @@ class Calendar extends Component {
       .catch(error => {
         console.log(`ERROR: ${error}`);
       });
-
-    console.log(this.state);
   };
+
   handleChange = e => {
     this.setState({
       selectedDate: e
@@ -70,19 +67,37 @@ class Calendar extends Component {
     // Date field on click should display calendar
     // After a date has been chosen, a call should be made to check availabilities
     // Time field should render and appear with timings disabled
-    const { slotsTaken } = this.state;
+    const { slotsTaken, today, selectedDate } = this.state;
+
+    let minutes = today.getMinutes();
+    let m = ((((minutes + 7.5) / 15) | 0) * 15) % 60;
+
+    let maxTime = new Date();
+    maxTime.setHours(23);
+    maxTime.setMinutes(45);
+
+    let midnight = new Date();
+    midnight.setHours(0, 0, 0, 0);
+
     return (
       <>
         <form onSubmit={this.handleSubmit}>
           <DatePicker
-            selected={this.state.selectedDate}
+            selected={selectedDate}
             onSelect={this.handleSelect} //when day is clicked
             onChange={this.handleChange}
             dateFormat="MMMM d, yyyy h:mm aa"
             timeFormat="HH:mm"
             showTimeSelect
             timeIntervals={15}
-            minDate={new Date()}
+            minDate={today}
+            minTime={
+              selectedDate !== null &&
+              selectedDate.getDate() - today.getDate() > 0
+                ? midnight
+                : today.setMinutes(m)
+            }
+            maxTime={maxTime}
             excludeTimes={slotsTaken}
             placeholderText={"Select a date"}
             timeCaption="Time"
