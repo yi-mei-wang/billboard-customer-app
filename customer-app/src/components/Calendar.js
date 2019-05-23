@@ -9,6 +9,7 @@ class Calendar extends Component {
     super(props);
     this.state = {
       today: new Date(),
+      selectedDate: null,
       slotsTaken: []
     };
   }
@@ -16,7 +17,23 @@ class Calendar extends Component {
   displayCalendar = () => {};
 
   handleSelect = e => {
+    console.log(e);
+    // Pass in the date
+    axios
+      .get(
+        `https://insta.nextacademy.com/api/v1/images/?userId=${
+          this.props.userId
+        }`
+      )
+      .then(result => {
+        this.setState({ slotsTaken: result.slots });
+      })
+      .catch(error => {
+        console.log(`ERROR: ${error}`);
+      });
+
     this.setState({
+      selectedDate: e,
       slotsTaken: [
         new Date("Thu May 23 2019 13:30:00 GMT+0800 (Malaysia Time)")
       ]
@@ -30,32 +47,33 @@ class Calendar extends Component {
   };
 
   handleChange = e => {
-    // console.log(e);
-    // Get the selected timeslot,
-    // send it to db
+    console.log(e);
+    this.setState({
+      selectedDate: e
+      // Get the selected timeslot,
+      // send it to db
+    });
   };
 
   render() {
     // Date field on click should display calendar
     // After a date has been chosen, a call should be made to check availabilities
     // Time field should render and appear with timings disabled
-    const { slotsTaken } = this.state;
+    const { slotsTaken, today } = this.state;
     return (
       <>
         <DatePicker
-          selected={this.state.today}
-          dateFormat="MMMM d, yyyy"
+          selected={this.state.selectedDate}
           onSelect={this.handleSelect} //when day is clicked
-        />
-        <DatePicker
-          selected={this.state.today}
           onChange={this.handleChange}
-          timeIntervals={15}
-          dateFormat="h:mm aa"
+          dateFormat="MMMM d, yyyy h:mm aa"
+          timeFormat="HH:mm"
           showTimeSelect
-          showTimeSelectOnly
-          timeCaption="Time"
+          timeIntervals={15}
+          minDate={new Date()}
           excludeTimes={slotsTaken}
+          placeholderText={"Select a date"}
+          timeCaption="Time"
         />
       </>
     );
