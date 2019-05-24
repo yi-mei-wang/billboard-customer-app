@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
-import "moment-timezone";
+import { Button } from "reactstrap";
 
 const server = "localhost:5000";
 
@@ -10,12 +10,14 @@ class Calendar extends Component {
     super(props);
     this.state = {
       today: new Date(),
-      selectedDate: null,
+      selectedDate: new Date(),
       slotsTaken: []
     };
   }
 
   handleSelect = e => {
+    console.log("handleSelect");
+
     // Returns a date object
     let chosenDate = new Date(e);
     let d = chosenDate.getDate();
@@ -42,6 +44,7 @@ class Calendar extends Component {
   };
 
   handleChange = e => {
+    console.log("handleChange");
     this.setState({
       selectedDate: e
     });
@@ -70,7 +73,7 @@ class Calendar extends Component {
     const { slotsTaken, today, selectedDate } = this.state;
 
     let minutes = today.getMinutes();
-    let m = ((((minutes + 7.5) / 15) | 0) * 15) % 60;
+    let m = minutes - (minutes % 15);
 
     let maxTime = new Date();
     maxTime.setHours(23);
@@ -92,10 +95,11 @@ class Calendar extends Component {
             timeIntervals={15}
             minDate={today}
             minTime={
-              selectedDate !== null &&
-              selectedDate.getDate() - today.getDate() > 0
+              selectedDate.getMonth() - today.getMonth() !== 0
                 ? midnight
-                : today.setMinutes(m)
+                : selectedDate.getDate() - today.getDate() === 0
+                ? today.setMinutes(m)
+                : midnight
             }
             maxTime={maxTime}
             excludeTimes={slotsTaken}
@@ -103,7 +107,10 @@ class Calendar extends Component {
             timeCaption="Time"
             className="w-200px text-center"
           />
-          <button type="submit" />
+          <Button type="submit" className="btn-primary btn">
+            {" "}
+            Submit{" "}
+          </Button>
         </form>
       </>
     );
