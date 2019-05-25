@@ -1,5 +1,13 @@
 import React from "react";
-import { Col, Button, Form, FormGroup, FormText, Input } from "reactstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Col,
+  FormText
+} from "reactstrap";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
