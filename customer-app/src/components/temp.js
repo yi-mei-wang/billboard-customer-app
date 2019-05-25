@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
 const thumbsContainer = {
@@ -33,9 +33,29 @@ const img = {
 };
 
 const Uploader = props => {
-  const maxSize = 1048576;
+  const maxSize = 5 * 1048576;
 
   const [files, setFiles] = useState([]);
+
+  const onDrop = useCallback(acceptedFiles => {
+    setFiles(
+      acceptedFiles.map(file =>
+        Object.assign(file, { preview: URL.createObjectURL(file) })
+      )
+    );
+
+    const reader = new FileReader();
+
+    reader.onabort = () => console.log("file reading was aborted");
+    reader.onerror = () => console.log("file reading has failed");
+    reader.onload = () => {
+      // Do whatever you want with the file contents
+      const binaryStr = reader.result;
+      console.log(binaryStr);
+    };
+
+    acceptedFiles.forEach(file => reader.readAsArrayBuffer(file));
+  }, []);
 
   const {
     getRootProps,
@@ -48,13 +68,7 @@ const Uploader = props => {
     accept: "image/png, image/jpg, image/jpeg",
     minSize: 0,
     maxSize,
-    onDrop: acceptedFiles => {
-      setFiles(
-        acceptedFiles.map(file =>
-          Object.assign(file, { preview: URL.createObjectURL(file) })
-        )
-      );
-    }
+    onDrop
   });
 
   const isFileTooLarge =
