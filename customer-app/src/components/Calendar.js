@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
-import { Button } from "reactstrap";
 
 const server = "localhost:5000";
 
@@ -55,22 +54,6 @@ class Calendar extends Component {
     this.setState({
       selectedDate: e
     });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log(e);
-    console.log(this.state.selectedDate);
-    let timeSlot = new Date(this.state.selectedDate);
-    console.log(timeSlot);
-    this.props.handleDate(timeSlot);
-    // axios
-    //   .post(`http://${server}/api/v1/orders/create`, {
-    //     timeSlot: timeSlot
-    //   })
-    //   .then(response => {
-    //     console.log(response);
-    //   });
   };
 
   render() {
