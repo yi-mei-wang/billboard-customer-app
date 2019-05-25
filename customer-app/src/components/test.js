@@ -1,1 +1,1 @@
-console.log(0 === null);
+console.log(new Date().getMonth());

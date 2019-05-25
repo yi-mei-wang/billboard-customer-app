@@ -11,42 +11,45 @@ class Calendar extends Component {
       today: new Date(),
       slotsTaken: [],
       selectedDate: null,
-      selectedTime: null
+      selectedTime: null,
+      minTime: new Date().setHours(0, 0, 0, 0)
     };
   }
 
-  checkAndSetTime = selectedDate => {
+  setMinTime = selectedDate => {
     const { today } = this.state;
 
     let minutes = new Date().getMinutes();
     let min = minutes - (minutes % 15);
     let hour = new Date().getHours();
 
+    // Default minTime is midnight
+    selectedDate.setHours(0, 0, 0, 0);
     // If today is selected, set the timing accordingly
     if (selectedDate.getMonth() - today.getMonth() === 0) {
       if (selectedDate.getDate() - today.getDate() === 0) {
         selectedDate.setHours(hour);
         selectedDate.setMinutes(min);
-      } else {
-        selectedDate.setHours(0, 0, 0, 0);
       }
-    } else {
-      selectedDate.setHours(0, 0, 0, 0);
     }
-    return selectedDate;
+    // Set minTime
+    this.setState({
+      minTime: selectedDate
+    });
+    this.props.handleDate(selectedDate);
   };
 
   selectDate = e => {
-    console.log(e);
-    const { today } = this.state;
-    // Returns a date object
+    // Query and set taken slots
     let selectedDate = new Date(e);
-    let d = selectedDate.getDate();
-    // = currentmonth - 1
-    let m = selectedDate.getMonth();
-    let y = selectedDate.getFullYear();
+    this.setState({
+      selectedDate,
+      selectedTime: null
+    });
 
-    // Pass in the date
+    let d = selectedDate.getDate();
+    let m = selectedDate.getMonth() + 1;
+    let y = selectedDate.getFullYear();
     axios
       .get(`http://${server}/api/v1/timeslots/show?d=${d}&m=${m}&y=${y}`)
 
@@ -63,18 +66,14 @@ class Calendar extends Component {
       .catch(error => {
         console.log(`ERROR: ${error}`);
       });
-    console.log(this.checkAndSetTime(selectedDate));
-    this.setState({
-      selectedTime: null,
-      selectedDate: this.checkAndSetTime(selectedDate)
-    });
+
+    // Set the minTime for the time picker
+    this.setMinTime(selectedDate);
+    // First display null in the time picker
   };
 
   handleChange = e => {
-    console.log("handleChange", e);
-    console.log("state", this.state);
     this.props.handleDate(e);
-    this.checkAndSetTime(new Date(e));
     this.setState({
       selectedTime: true,
       selectedDate: e
@@ -85,7 +84,13 @@ class Calendar extends Component {
     // Date field on click should display calendar
     // After a date has been chosen, a call should be made to check availabilities
     // Time field should render and appear with timings disabled
-    const { slotsTaken, today, selectedDate, selectedTime } = this.state;
+    const {
+      slotsTaken,
+      today,
+      selectedDate,
+      selectedTime,
+      minTime
+    } = this.state;
 
     let maxTime = new Date();
     maxTime.setHours(23);
@@ -104,13 +109,13 @@ class Calendar extends Component {
 
         {selectedDate !== null && (
           <DatePicker
-            selected={selectedTime && selectedDate}
+            selected={selectedDate}
             onChange={this.handleChange}
             showTimeSelect
             showTimeSelectOnly
             timeIntervals={15}
             dateFormat="h:mm aa"
-            minTime={selectedDate}
+            minTime={minTime}
             maxTime={maxTime}
             excludeTimes={slotsTaken}
             timeCaption="Time"
