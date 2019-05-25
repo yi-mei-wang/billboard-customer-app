@@ -39,10 +39,14 @@ class App extends React.Component {
         {/* <Navbar users={users} /> */}
 
         <Switch>
-
-          <Route exact path="/" component={props => <FormContainer {...props} isLoading={isLoading} users={users} />} />
+          <Route
+            exact
+            path="/"
+            component={props => (
+              <FormContainer {...props} isLoading={isLoading} users={users} />
+            )}
+          />
           {/* <Calendar /> */}
-
         </Switch>
       </>
     ); //end of return
