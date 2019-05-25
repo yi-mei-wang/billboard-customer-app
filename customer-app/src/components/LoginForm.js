@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, FormGroup, Input, Col, FormText } from "reactstrap";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import logo from "./images/logo.png";
 
@@ -47,7 +47,7 @@ class LoginModal extends React.Component {
   render() {
     return (
       <div>
-        <div className="text-center">
+        <div className="text-center my-3">
           <img src={logo} className="logo" alt="logo" />
         </div>
         <Form>
@@ -57,7 +57,7 @@ class LoginModal extends React.Component {
                 type="text"
                 name="username"
                 id="username"
-                placeholder="username"
+                placeholder="Username"
                 value={this.state.username}
                 onChange={this.handleUsernameChange}
               />
@@ -69,7 +69,7 @@ class LoginModal extends React.Component {
                 type="password"
                 name="password"
                 id="password"
-                placeholder="Your Password"
+                placeholder="Your password"
                 value={this.state.password}
                 onChange={this.handlePasswordChange}
               />
@@ -78,7 +78,7 @@ class LoginModal extends React.Component {
         </Form>
         <FormText className="text-center">
           New member?
-          <p onClick={e => this.props.handleToggle(e)}> Sign Up Now</p>
+          <Link onClick={e => this.props.handleToggle(e)}> Sign Up Now</Link>
         </FormText>
         <br />
         <div className="text-center">
