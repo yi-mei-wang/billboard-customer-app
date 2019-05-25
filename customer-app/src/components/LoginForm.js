@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, FormGroup, Input, Col, FormText } from "reactstrap";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import logo from "./images/logo.png";
 
@@ -78,7 +78,7 @@ class LoginModal extends React.Component {
         </Form>
         <FormText className="text-center">
           New member?
-          <p onClick={e => this.props.handleToggle(e)}> Sign Up Now</p>
+          <Link onClick={e => this.props.handleToggle(e)}> Sign Up Now</Link>
         </FormText>
         <br />
         <div className="text-center">
