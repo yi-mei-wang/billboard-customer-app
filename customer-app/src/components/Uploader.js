@@ -66,12 +66,13 @@ class Uploader extends Component {
     ));
 
     return (
-      <div className="text-center mt-5">
+      <div className="text-center">
         <Dropzone
           onDrop={this.onDrop}
           accept="image/*"
           minSize={0}
           maxSize={maxSize}
+          style={{ height: "300px", border: "5px solid pink" }}
         >
           {({
             getRootProps,
@@ -84,7 +85,7 @@ class Uploader extends Component {
               rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
             return (
               <>
-                <div {...getRootProps()}>
+                <div {...getRootProps({ className: "dropzone" })}>
                   <input {...getInputProps()} />
                   {!isDragActive && "Click here or drop a file to upload!"}
                   {isDragActive && !isDragReject && "Drop it like it's hot!"}

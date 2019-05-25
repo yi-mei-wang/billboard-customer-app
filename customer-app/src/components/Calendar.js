@@ -104,7 +104,7 @@ class Calendar extends Component {
           dateFormat="MMMM d, yyyy"
           minDate={today}
           placeholderText={"Select a date"}
-          className="w-200px text-center"
+          className="w-200px text-center datepicker-input"
         />
 
         {selectedDate !== null && (
@@ -120,7 +120,7 @@ class Calendar extends Component {
             excludeTimes={slotsTaken}
             timeCaption="Time"
             placeholderText={"Select a time"}
-            className="w-120px text-center"
+            className="w-120px text-center datepicker-input"
           />
         )}
       </>

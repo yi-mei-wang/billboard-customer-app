@@ -83,7 +83,7 @@ class OrderForm extends Component {
     return (
       <>
         <form onSubmit={this.handleSubmit} className={"mx-auto"}>
-          <div className="row">
+          <div className="row p-3 mx-auto">
             <div
               className={
                 "col-12 col-md-3 my-3 p-2 mx-auto text-center border border-primary"
