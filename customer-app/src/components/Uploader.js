@@ -92,8 +92,8 @@ class Uploader extends Component {
                   {isFileTooLarge && (
                     <div className="text-danger mt-2">File is too large.</div>
                   )}
+                  <ThumbsContainer>{thumbs}</ThumbsContainer>
                 </div>
-                <ThumbsContainer>{thumbs}</ThumbsContainer>
               </>
             );
           }}
