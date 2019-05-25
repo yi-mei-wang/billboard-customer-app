@@ -6,6 +6,15 @@
 .react-datepicker__time-box {
   width: 100px !important;
   border: none;
+.formDis {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: beige;
+  background-size: cover;
+  border-radius: 25px;
+  padding: 20px;
 }
 
 .datepicker-input {
@@ -33,4 +42,8 @@
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
+.logo {
+  width: 250px;
+  height: 250px;
+  border-radius: 200px;
 }
