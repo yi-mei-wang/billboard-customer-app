@@ -1,100 +1,106 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { Component } from "react";
+import Dropzone from "react-dropzone";
+import styled from "styled-components";
 
-const thumbsContainer = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  marginTop: 16
-};
+const ThumbsContainer = styled.aside`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 16px;
+`;
 
-const thumb = {
-  display: "inline-flex",
-  borderRadius: 2,
-  border: "1px solid #eaeaea",
-  marginBottom: 8,
-  marginRight: 8,
-  width: 100,
-  height: 100,
-  padding: 4,
-  boxSizing: "border-box"
-};
+const Thumb = styled.div`
+  display: inline-flex;
+  border-radius: 2px;
+  border: 1px solid #eaeaea;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  width: 160px;
+  height: 90px;
+  padding: 4px;
+  box-sizing: border-box;
+`;
 
-const thumbInner = {
-  display: "flex",
-  minWidth: 0,
-  overflow: "hidden"
-};
+const ThumbInner = styled.div`
+  display: flex;
+  min-width: 0;
+  overflow: hidden;
+`;
 
-const img = {
-  display: "block",
-  width: "auto",
-  height: "100%"
-};
+const Img = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 
-const Uploader = ({ handleImgs }) => {
-  const maxSize = 5 * 1048576;
+class Uploader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imgs: []
+    };
+  }
 
-  const [files, setFiles] = useState([]);
+  onDrop = acceptedFiles => {
+    this.props.handleImgs(acceptedFiles);
 
-  const onDrop = useCallback(acceptedFiles => {
-    handleImgs(acceptedFiles);
-
-    setFiles(
-      acceptedFiles.map(file =>
-        Object.assign(file, { preview: URL.createObjectURL(file) })
-      )
+    let newImgs = acceptedFiles.map(file =>
+      Object.assign(file, { preview: URL.createObjectURL(file) })
     );
-    // eslint-disable-next-line
-  }, []);
+    const copy = [...this.state.imgs];
+    this.setState({
+      imgs: [...copy, ...newImgs]
+    });
+    console.log(this.state);
+  };
 
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragReject,
-    rejectedFiles
-  } = useDropzone({
-    accept: "image/png, image/jpg, image/jpeg",
-    minSize: 0,
-    maxSize,
-    onDrop
-  });
+  render() {
+    const maxSize = 5 * 1048576;
+    const thumbs = this.state.imgs.map(file => (
+      <Thumb key={file.name}>
+        <ThumbInner>
+          <Img src={file.preview} alt="User uploads" />
+        </ThumbInner>
+      </Thumb>
+    ));
 
-  const isFileTooLarge =
-    rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
-
-  const thumbs = files.map(file => (
-    <div style={thumb} key={file.name}>
-      <div style={thumbInner}>
-        <img src={file.preview} alt="User uploads" style={img} />
+    return (
+      <div className="text-center mt-5">
+        <Dropzone
+          onDrop={this.onDrop}
+          accept="image/*"
+          minSize={0}
+          maxSize={maxSize}
+        >
+          {({
+            getRootProps,
+            getInputProps,
+            isDragActive,
+            isDragReject,
+            rejectedFiles
+          }) => {
+            const isFileTooLarge =
+              rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
+            return (
+              <>
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {!isDragActive && "Click here or drop a file to upload!"}
+                  {isDragActive && !isDragReject && "Drop it like it's hot!"}
+                  {isDragReject && "File type not accepted, sorry!"}
+                  {isFileTooLarge && (
+                    <div className="text-danger mt-2">File is too large.</div>
+                  )}
+                </div>
+                <ThumbsContainer>{thumbs}</ThumbsContainer>
+              </>
+            );
+          }}
+        </Dropzone>
       </div>
-    </div>
-  ));
-
-  useEffect(
-    () => () => {
-      files.forEach(file => URL.revokeObjectURL(file.preview));
-    },
-    [files]
-  );
-
-  return (
-    <section className="container text-center mt-5">
-      <div {...getRootProps()}>
-        <input {...getInputProps()} type={"file"} />
-        <p>
-          {!isDragActive && "Click me or drag a file to upload!"}
-          {isDragActive && !isDragReject && "Drop it like it's hot!"}
-          {isDragReject && "Only .png, .jpg and .jpeg are accepted, sorry!"}
-          {isFileTooLarge && (
-            <div className="text-danger mt-2">File is too large.</div>
-          )}
-        </p>
-      </div>
-      <aside style={thumbsContainer}>{thumbs}</aside>
-    </section>
-  );
-};
+    );
+  }
+}
 
 export default Uploader;
