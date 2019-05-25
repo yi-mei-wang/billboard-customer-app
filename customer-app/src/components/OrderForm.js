@@ -25,11 +25,9 @@ class OrderForm extends Component {
   }
 
   handleDate = chosenDate => {
-    console.log(chosenDate);
     this.setState({
       chosenDate
     });
-    console.log(this.state);
   };
 
   handleImgs = imgs => {
