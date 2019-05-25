@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Col,
-  FormText
-} from "reactstrap";
+import { Col, Button, Form, FormGroup, FormText, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
@@ -64,26 +56,28 @@ class SignUpModal extends React.Component {
         <h2>Sign Up</h2>
         <Form>
           <FormGroup row>
-            <Label for="username" sm={2}>
+            {/* <Label for="username" sm={2}>
               Username
-            </Label>
-            <Col sm={10}>
+            </Label> */}
+            <Col sm={12}>
               <Input
+                className="form-control"
                 type="text"
                 name="text"
                 id="username"
-                placeholder="Your Preferred Username"
+                placeholder="Your preferred username"
                 value={this.state.username}
                 onChange={this.handleUsernameChange}
               />
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="email" sm={2}>
+            {/* <Label for="email" sm={2}>
               Email
-            </Label>
-            <Col sm={10}>
+            </Label> */}
+            <Col sm={12}>
               <Input
+                className="form-control"
                 type="email"
                 name="email"
                 id="email"
@@ -94,37 +88,39 @@ class SignUpModal extends React.Component {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="password" sm={2}>
+            {/* <Label for="password" sm={2}>
               Password
-            </Label>
-            <Col sm={10}>
+            </Label> */}
+            <Col sm={12}>
               <Input
+                className="form-control"
                 type="password"
                 name="password"
                 id="password"
-                placeholder="Your Preferred Password"
+                placeholder="Your preferred password"
                 value={this.state.password}
                 onChange={this.handlePasswordChange}
               />
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="password" sm={2}>
+            {/* <Label for="password" sm={2}>
               Confirm Password
-            </Label>
-            <Col sm={10}>
+            </Label> */}
+            <Col sm={12}>
               <Input
+                className="form-control"
                 type="password"
                 name="password"
                 id="confirm-password"
-                placeholder="Confirm Your Preferred Password"
+                placeholder="Confirm your password"
                 value={this.state.confirmPassword}
                 onChange={this.handleConfirmPasswordChange}
               />
               {this.state.password === this.state.confirmPassword ? (
                 <br />
               ) : (
-                <FormText color="danger">Passwords does not match</FormText>
+                <FormText color="danger">Passwords do not match</FormText>
               )}
             </Col>
           </FormGroup>
@@ -137,14 +133,12 @@ class SignUpModal extends React.Component {
         <div className="text-center">
           <Button
             color="primary"
-            className={
-              this.state.username !== "" &&
-              this.state.email !== "" &&
-              this.state.password !== "" &&
-              this.state.confirmPassword !== ""
-                ? ""
-                : "disabled"
-            }
+            disabled={Boolean(
+              this.state.username !== "" ||
+                this.state.email !== "" ||
+                this.state.password !== "" ||
+                this.state.confirmPassword !== ""
+            )}
             onClick={() => {
               this.handleSignUp();
               console.log(
