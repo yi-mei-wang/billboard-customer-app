@@ -57,25 +57,6 @@ class OrderForm extends Component {
       .then(response => {
         console.log(response);
       });
-
-    function uploadFile(files) {
-      var formData = new FormData();
-
-      files.map((file, index) => {
-        formData.append(`file${index}`, file);
-      });
-
-      fetch("https://path/to/api", {
-        // content-type header should not be specified!
-        method: "POST",
-        body: formData
-      })
-        .then(response => response.json())
-        .then(success => {
-          // Do something with the successful response
-        })
-        .catch(error => console.log(error));
-    }
   };
 
   render() {
