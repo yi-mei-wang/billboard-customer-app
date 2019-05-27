@@ -56,8 +56,9 @@ class Uploader extends Component {
   };
 
   render() {
+    const { imgs } = this.state;
     const maxSize = 5 * 1048576;
-    const thumbs = this.state.imgs.map(file => (
+    const thumbs = imgs.map(file => (
       <Thumb key={file.name}>
         <ThumbInner>
           <Img src={file.preview} alt="User uploads" />
@@ -73,6 +74,8 @@ class Uploader extends Component {
           minSize={0}
           maxSize={maxSize}
           style={{ height: "300px", border: "5px solid pink" }}
+          // Check for the number of images in the state, if more than 12 disable the thing
+          disabled={imgs.length > 11 && true}
         >
           {({
             getRootProps,
@@ -85,9 +88,14 @@ class Uploader extends Component {
               rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
             return (
               <>
-                <div {...getRootProps({ className: "dropzone" })}>
+                <div {...getRootProps({ className: "dropzone my-auto" })}>
                   <input {...getInputProps()} />
-                  {!isDragActive && "Click here or drop a file to upload!"}
+                  {!isDragActive && (
+                    <>
+                      <p>Click here or drop a file to upload! </p>
+                      <p>Maximum 12 images allowed.</p>
+                    </>
+                  )}
                   {isDragActive && !isDragReject && "Drop it like it's hot!"}
                   {isDragReject && "File type not accepted, sorry!"}
                   {isFileTooLarge && (
