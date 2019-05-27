@@ -135,10 +135,10 @@ class SignUpModal extends React.Component {
           <Button
             color="primary"
             disabled={Boolean(
-              this.state.username !== "" ||
-                this.state.email !== "" ||
-                this.state.password !== "" ||
-                this.state.confirmPassword !== ""
+              this.state.username === "" ||
+                this.state.email === "" ||
+                this.state.password === "" ||
+                this.state.confirmPassword === ""
             )}
             onClick={() => {
               this.handleSignUp();
