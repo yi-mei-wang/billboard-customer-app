@@ -46,6 +46,7 @@ class LoginModal extends React.Component {
   };
 
   render() {
+
     return (
       <div>
         <div className="text-center my-3">
@@ -94,11 +95,11 @@ class LoginModal extends React.Component {
               this.handleLogin();
               console.log(
                 "Username: " +
-                  this.state.username +
-                  "\n" +
-                  "Password: " +
-                  this.state.password +
-                  "\n"
+                this.state.username +
+                "\n" +
+                "Password: " +
+                this.state.password +
+                "\n"
               );
             }}
           >

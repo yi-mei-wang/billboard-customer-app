@@ -120,7 +120,7 @@ class Calendar extends Component {
             excludeTimes={slotsTaken}
             timeCaption="Time"
             placeholderText={"Select a time"}
-            className="w-120px text-center datepicker-input"
+            className="w-200px text-center datepicker-input"
           />
         )}
       </>

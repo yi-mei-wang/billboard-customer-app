@@ -63,7 +63,9 @@ class OrderForm extends Component {
     const { chosenDate, imgs } = this.state;
     return (
       <>
+        <h1>New ADs</h1>
         <form onSubmit={this.handleSubmit} className={"mx-auto"}>
+          <h3>1. Date and time selection</h3>
           <div className="row p-3 mx-auto">
             <div
               className={
@@ -72,15 +74,17 @@ class OrderForm extends Component {
             >
               <Calendar handleDate={this.handleDate} />
             </div>
-
-            <div
-              className={
-                "col-12 col-md-9 my-3 p-2 mx-auto border border-primary"
-              }
-            >
-              <Uploader handleImgs={this.handleImgs} chosenDate={chosenDate} />
-            </div>
           </div>
+          <h3>2. Advert upload</h3>
+
+          <div
+            className={
+              "col-12 col-md-9 my-3 p-2 mx-auto border border-primary"
+            }
+          >
+            <Uploader handleImgs={this.handleImgs} chosenDate={chosenDate} />
+          </div>
+
 
           <div
             className={

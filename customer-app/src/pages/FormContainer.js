@@ -1,6 +1,8 @@
 import React from "react";
-import LoginForm from "./LoginForm";
-import SignUpForm from "./SignUpForm";
+import LoginForm from "../components/LoginForm";
+import SignUpForm from "../components/SignUpForm";
+import { Redirect } from "react-router-dom";
+
 
 class FormContainer extends React.Component {
   constructor(props) {
@@ -18,6 +20,8 @@ class FormContainer extends React.Component {
   };
 
   render() {
+    const { currentUser } = this.props;
+    if (currentUser) return <Redirect to='/' />;
     const { isLoginForm } = this.state;
     let Container = isLoginForm ? (
       <LoginForm
@@ -25,11 +29,11 @@ class FormContainer extends React.Component {
         setUser={this.props.setUser}
       />
     ) : (
-      <SignUpForm
-        handleToggle={this.handleToggle}
-        setUser={this.props.setUser}
-      />
-    );
+        <SignUpForm
+          handleToggle={this.handleToggle}
+          setUser={this.props.setUser}
+        />
+      );
 
     return <div className="formDis">{Container}</div>;
   }

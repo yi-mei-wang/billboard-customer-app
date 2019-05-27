@@ -2,8 +2,7 @@
   width: 200px;
 }
 
-.react-datepicker__time-container,
-.react-datepicker__time-box {
+.react-datepicker__time-container, .react-datepicker__time-box {
   width: 100px !important;
   border: none;
 }
@@ -51,4 +50,26 @@
   width: 250px;
   height: 250px;
   border-radius: 200px;
+}
+
+.bodyBg {
+  background-color: lightgray;
+}
+
+.selectionBtn {
+  height: 500px;
+  width: 200px;
+  border-radius: 50px;
+}
+
+#greenbtn {
+  background-color: lightgreen;
+}
+
+#bluebtn {
+  background-color: lightblue;
+}
+
+#greybtn {
+  background-color: grey;
 }

@@ -1,10 +1,9 @@
 // Libraries
 import React from "react";
-import Axios from "axios";
-import { Route, Switch, Link } from "react-router-dom";
-// User components
-import FormContainer from "./components/FormContainer";
-import OrderForm from "./components/OrderForm.js";
+import { Route, Switch } from "react-router-dom";
+// Pages
+import FormContainer from "./pages/FormContainer";
+import Homepage from "./pages/Homepage";
 // Stylesheets
 import "./App.css";
 
@@ -12,8 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentuser: null,
-      isLoading: true
+      currentUser: localStorage.getItem('jwt'),
     };
   }
 
@@ -35,32 +33,22 @@ class App extends React.Component {
   };
 
   render() {
-    const { isLoading } = this.state;
+    const { currentUser } = this.state;
     return (
       <>
-        {/* <Navbar users={users} /> */}
-
         <Switch>
           {/* Log in/sign up page */}
           <Route
-            exact
-            path="/"
-            component={props => (
-              <FormContainer
-                {...props}
-                // Why?
-                isLoading={isLoading}
-                setUser={this.setUser}
-              />
-            )}
+            exact path="/login"
+            component={props => <FormContainer {...props} currentUser={currentUser} setUser={this.setUser} />}
           />
-          {/* Order form */}
+          {/* Homepage*/}
           <Route
-            path="/campaigns/new"
-            component={props => <OrderForm {...props} />}
+            exact path="/:status?"
+            component={props => <Homepage {...props} currentUser={currentUser} removeUser={this.removeUser} />}
           />
         </Switch>
-        <Link to="/campaigns/new">New campaign</Link>
+        {/* <Link to="/campaigns/new">New campaign</Link> */}
       </>
     ); //end of return
   } //end of render
