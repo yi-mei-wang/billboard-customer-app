@@ -43,6 +43,7 @@ class SignUpModal extends React.Component {
         console.log(response);
         localStorage.setItem("jwt", response.data.auth_token);
         localStorage.setItem("id", response.data.user.id);
+        this.props.setUser(response.data.user);
       })
       .catch((error, response) => {
         console.log("hel", response);

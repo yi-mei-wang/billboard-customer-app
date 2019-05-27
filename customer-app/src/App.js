@@ -1,7 +1,7 @@
 // Libraries
 import React from "react";
 import Axios from "axios";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 // User components
 import FormContainer from "./components/FormContainer";
 import OrderForm from "./components/OrderForm.js";
@@ -12,43 +12,55 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
-      currentuser: "",
-      isLoading: true,
-      message: ""
+      currentuser: null,
+      isLoading: true
     };
   }
 
-  componentDidMount() {
-    // Why??
-    Axios("http://localhost:5000/api/v1/users")
-      .then(data => {
-        this.setState({
-          users: data.data,
-          isLoading: false
-        });
-      })
-      .catch(error => {
-        console.log(error);
+  // Upon logging in, set currentUser in state
+  setUser = currentUser => {
+    if (currentUser) {
+      this.setState({
+        currentUser
       });
-  }
+    }
+  };
+
+  // Upon loggin out, remove currentUser from state
+  removeUser = () => {
+    localStorage.removeItem("jwt");
+    this.setState({
+      currentUser: null
+    });
+  };
 
   render() {
-    const { isLoading, users } = this.state;
+    const { isLoading } = this.state;
     return (
       <>
         {/* <Navbar users={users} /> */}
 
         <Switch>
+          {/* Log in/sign up page */}
           <Route
             exact
             path="/"
             component={props => (
-              <FormContainer {...props} isLoading={isLoading} users={users} />
+              <FormContainer
+                {...props}
+                // Why?
+                isLoading={isLoading}
+                setUser={this.setUser}
+              />
             )}
           />
-          {/* <Calendar /> */}
+          {/* Order form */}
+          <Route
+            path="/campaigns/new"
+            component={props => <OrderForm {...props} />}
+          />
         </Switch>
+        <Link to="/campaigns/new">New campaign</Link>
       </>
     ); //end of return
   } //end of render

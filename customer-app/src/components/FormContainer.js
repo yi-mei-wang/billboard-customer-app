@@ -20,9 +20,15 @@ class FormContainer extends React.Component {
   render() {
     const { isLoginForm } = this.state;
     let Container = isLoginForm ? (
-      <LoginForm handleToggle={this.handleToggle} users={this.props} />
+      <LoginForm
+        handleToggle={this.handleToggle}
+        setUser={this.props.setUser}
+      />
     ) : (
-      <SignUpForm handleToggle={this.handleToggle} users={this.props} />
+      <SignUpForm
+        handleToggle={this.handleToggle}
+        setUser={this.props.setUser}
+      />
     );
 
     return <div className="formDis">{Container}</div>;

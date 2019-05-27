@@ -37,6 +37,7 @@ class LoginModal extends React.Component {
         if (response.status === 200) {
           localStorage.setItem("jwt", response.data.auth_token);
           localStorage.setItem("id", response.data.user.id);
+          this.props.setUser(response.data.user);
         }
       })
       .catch(error => {
