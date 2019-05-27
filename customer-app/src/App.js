@@ -1,11 +1,12 @@
+// Libraries
 import React from "react";
-import "./App.css";
 import Axios from "axios";
-import FormContainer from "./components/FormContainer";
 import { Route, Switch } from "react-router-dom";
-import React from "react";
-import "./App.css";
+// User components
+import FormContainer from "./components/FormContainer";
 import OrderForm from "./components/OrderForm.js";
+// Stylesheets
+import "./App.css";
 
 class App extends React.Component {
   constructor(props) {
