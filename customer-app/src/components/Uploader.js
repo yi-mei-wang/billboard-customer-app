@@ -7,6 +7,7 @@ const ThumbsContainer = styled.aside`
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 16px;
+  justify-content: center;
 `;
 
 const Thumb = styled.div`
@@ -59,11 +60,15 @@ class Uploader extends Component {
     const { imgs } = this.state;
     const maxSize = 5 * 1048576;
     const thumbs = imgs.map(file => (
-      <Thumb key={file.name}>
-        <ThumbInner>
-          <Img src={file.preview} alt="User uploads" />
-        </ThumbInner>
-      </Thumb>
+      <div>
+        <Thumb key={file.name}>
+          <ThumbInner>
+            <Img src={file.preview} alt="User uploads" />
+          </ThumbInner>
+        </Thumb>
+        {/* Render error message depending on the error returned */}
+        <p> ERROR MESSAGE </p>
+      </div>
     ));
 
     return (
@@ -73,7 +78,7 @@ class Uploader extends Component {
           accept="image/*"
           minSize={0}
           maxSize={maxSize}
-          style={{ height: "300px", border: "5px solid pink" }}
+          style={{ height: "300px" }}
           // Check for the number of images in the state, if more than 12 disable the thing
           disabled={imgs.length > 11 && true}
         >
@@ -93,7 +98,7 @@ class Uploader extends Component {
                   {!isDragActive && (
                     <>
                       <p>Click here or drop a file to upload! </p>
-                      <p>Maximum 12 images allowed.</p>
+                      <small>Maximum 12 images allowed.</small>
                     </>
                   )}
                   {isDragActive && !isDragReject && "Drop it like it's hot!"}
