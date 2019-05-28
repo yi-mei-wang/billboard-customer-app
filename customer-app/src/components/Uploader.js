@@ -35,6 +35,14 @@ const Img = styled.img`
   object-fit: cover;
 `;
 
+const Link = styled.p`
+  color: #017738;
+
+  &:hover {
+    color: #f13c20;
+  }
+`;
+
 class Uploader extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +52,6 @@ class Uploader extends Component {
   }
 
   deleteImg = e => {
-    console.log(e.target.id);
     e.stopPropagation();
     const copy = this.state.imgs;
     copy.splice(e.target.id, 1);
@@ -78,14 +85,14 @@ class Uploader extends Component {
           </ThumbInner>
         </Thumb>
         {/* Render error message depending on the error returned */}
-        <p
+        <Link
           id={index}
           onClick={this.deleteImg}
           style={{ zIndex: 10, position: "relative" }}
         >
           {" "}
           Delete image{" "}
-        </p>
+        </Link>
       </div>
     ));
 

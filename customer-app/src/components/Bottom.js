@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as AddSvg } from "./images/add.svg";
 import { ReactComponent as PastAds } from "./images/list.svg";
@@ -68,27 +69,39 @@ const NavLinks = styled.p`
   color: red;
 `;
 
-const BottomBar = () => (
-  <>
-    <Bottom>
-      <span>
-        <PastAds />
-      </span>
-      <span>
-        <FutureAds />
-      </span>
-    </Bottom>
-    {/* <NavLinks>Past Ads</NavLinks> */}
-    {/* <div
+const BottomBar = props => {
+  const handleExpired = e => {
+    props.history.push("/expired");
+  };
+  const handleScheduled = e => {
+    props.history.push("/scheduled");
+  };
+  const handleNew = e => {
+    props.history.push("/New");
+  };
+  return (
+    <>
+      <Bottom>
+        <span>
+          <PastAds onClick={handleExpired} />
+        </span>
+
+        <span>
+          <FutureAds onClick={handleScheduled} style={{ zIndex: 10 }} />
+        </span>
+      </Bottom>
+      {/* <NavLinks>Past Ads</NavLinks> */}
+      {/* <div
       className="text-center"
       style={{ width: "100vw", position: "fixed", bottom: "25px" }}
     > */}
-    <AddButtonContainer />
-    <AddButton>
-      <AddSvg />
-    </AddButton>
-    {/* </div> */}
-  </>
-);
+      <AddButtonContainer />
+      <AddButton>
+        <AddSvg onClick={handleNew} />
+      </AddButton>
+      {/* </div> */}
+    </>
+  );
+};
 
 export default BottomBar;

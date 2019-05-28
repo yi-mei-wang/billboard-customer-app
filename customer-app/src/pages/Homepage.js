@@ -18,7 +18,7 @@ const Main = styled.div`
 class Homepage extends React.Component {
   render() {
     const { history, currentUser } = this.props;
-    if (!currentUser) return <Redirect to="/login" />;
+    // if (!currentUser) return <Redirect to="/login" />;
     let Container =
       this.props.match.url === "/" ? <Selection history={history} /> : <h1 />;
 
@@ -45,7 +45,7 @@ class Homepage extends React.Component {
           </Switch>
 
           {Container}
-          <BottomBar />
+          <BottomBar history={history} />
         </Main>
       </>
     );

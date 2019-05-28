@@ -49,6 +49,7 @@ body {
 button {
   border-radius: 0 !important;
 }
+
 h2 {
   font-weight: 600;
 }
@@ -59,4 +60,12 @@ h4 {
 
 .bg-scondary {
   background-color: $scondary;
+}
+
+a {
+  color: #00ab50;
+}
+
+a:hover {
+  color: #f13c20;
 }
