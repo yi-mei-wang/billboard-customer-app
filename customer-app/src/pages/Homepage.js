@@ -2,10 +2,18 @@ import React from "react";
 import Navbar from "../components/Navbar.js";
 import { Redirect } from "react-router-dom";
 import { Route, Switch, Link } from "react-router-dom";
+import styled from "styled-components";
 import Selection from "../components/Ads/Selection";
 import OrderForm from "../components/OrderForm";
 import ScheduledAds from "../components/Ads/ScheduledAds";
 import ExpiredAds from "../components/Ads/ExpiredAds";
+import BottomBar from "../components/Bottom";
+
+const Main = styled.div`
+  top: 50px;
+  height: 88vh;
+  overflow: scroll;
+`;
 
 class Homepage extends React.Component {
   render() {
@@ -15,29 +23,31 @@ class Homepage extends React.Component {
       this.props.match.url === "/" ? <Selection history={history} /> : <h1 />;
 
     return (
-      <div>
-        <Navbar history={history} removeUser={this.props.removeUser} />
+      <>
+        {/* <Navbar history={history} removeUser={this.props.removeUser} /> */}
+        <Main>
+          <Switch>
+            <Route
+              exact
+              path="/new"
+              component={props => <OrderForm {...props} />}
+            />
+            <Route
+              exact
+              path="/scheduled"
+              component={props => <ScheduledAds {...props} />}
+            />
+            <Route
+              exact
+              path="/expired"
+              component={props => <ExpiredAds {...props} />}
+            />
+          </Switch>
 
-        <Switch>
-          <Route
-            exact
-            path="/new"
-            component={props => <OrderForm {...props} />}
-          />
-          <Route
-            exact
-            path="/scheduled"
-            component={props => <ScheduledAds {...props} />}
-          />
-          <Route
-            exact
-            path="/expired"
-            component={props => <ExpiredAds {...props} />}
-          />
-        </Switch>
-
-        {Container}
-      </div>
+          {Container}
+          <BottomBar />
+        </Main>
+      </>
     );
   }
 }

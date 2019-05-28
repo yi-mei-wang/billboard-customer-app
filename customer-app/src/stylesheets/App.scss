@@ -6,12 +6,12 @@ $scondary: #4056a1;
 
 body {
   line-height: 1.2rem;
-  font-family: "Abel", "Roboto Condensed", "Open Sans", sans-serif !important;
+  font-family: "Roboto Condensed", "Open Sans", sans-serif !important;
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 200;
   text-rendering: optimizeLegibility;
   color: #222222;
-  background-color: #4056a1;
+  background-color: white;
 }
 
 .w-200px {
@@ -49,10 +49,12 @@ body {
 button {
   border-radius: 0 !important;
 }
+h2 {
+  font-weight: 600;
+}
 
-h2,
 h4 {
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .bg-scondary {

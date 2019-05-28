@@ -1,4 +1,9 @@
 import React from "react";
+import styled from "styled-components";
+
+const Logo = styled.h3`
+  font-family: "Staatliches", "open sans";
+`;
 
 class SideBar extends React.Component {
   constructor(props) {
@@ -26,22 +31,8 @@ class SideBar extends React.Component {
         <button className="my-button" onClick={this.toggleSidebar}>
           {collapsed ? "☰" : "X"}
         </button>
-        <div className="sidebar">
-          {users &&
-            users.map((user, index) => (
-              <div key={index}>
-                <img
-                  src={`https://api.adorable.io/avatars/40/${
-                    user.username
-                  }.png`}
-                  alt="Profile"
-                  className="profile-pic m-2"
-                />
-                <p className="d-inline-block">
-                  {user.username} {user.username === isSelf.username && "(you)"}
-                </p>
-              </div>
-            ))}
+        <div className="sidebar text-center">
+          <Logo>Advengers</Logo>
         </div>
       </div>
     );

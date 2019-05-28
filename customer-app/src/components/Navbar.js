@@ -8,8 +8,13 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import logo from "./images/logo.png";
+
+const Logo = styled.h3`
+  font-family: "Pacifico", cursive;
+`;
 
 export default class NavBar extends React.Component {
   state = {
@@ -28,17 +33,17 @@ export default class NavBar extends React.Component {
       <div>
         <Navbar color="light" light style={{ height: "50px" }}>
           <Link to="/">
-            <img
+            {/* <img
               src={logo}
               width="30"
               height="30"
               alt=""
               className="rounded-circle"
-            />
+            /> */}
           </Link>
           <NavbarBrand className="mr-auto ml-2 my-auto">
             <Link to="/" style={{ color: "#000000", textDecoration: "none" }}>
-              ADventure
+              <Logo>Adventurers</Logo>
             </Link>
           </NavbarBrand>
 

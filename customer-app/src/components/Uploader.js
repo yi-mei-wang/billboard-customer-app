@@ -16,8 +16,8 @@ const Thumb = styled.div`
   border: 1px solid #eaeaea;
   margin-bottom: 8px;
   margin-right: 8px;
-  width: 160px;
-  height: 90px;
+  width: 200px;
+  height: 120px;
   padding: 4px;
   box-sizing: border-box;
 `;
@@ -43,6 +43,17 @@ class Uploader extends Component {
     };
   }
 
+  deleteImg = e => {
+    console.log(e.target.id);
+    e.stopPropagation();
+    const copy = this.state.imgs;
+    copy.splice(e.target.id, 1);
+    this.setState({
+      imgs: [...copy]
+    });
+    // Pop the corresponding img from the state
+  };
+
   onDrop = acceptedFiles => {
     this.props.handleImgs(acceptedFiles);
 
@@ -59,7 +70,7 @@ class Uploader extends Component {
   render() {
     const { imgs } = this.state;
     const maxSize = 5 * 1048576;
-    const thumbs = imgs.map(file => (
+    const thumbs = imgs.map((file, index) => (
       <div>
         <Thumb key={file.name}>
           <ThumbInner>
@@ -67,7 +78,14 @@ class Uploader extends Component {
           </ThumbInner>
         </Thumb>
         {/* Render error message depending on the error returned */}
-        <p> ERROR MESSAGE </p>
+        <p
+          id={index}
+          onClick={this.deleteImg}
+          style={{ zIndex: 10, position: "relative" }}
+        >
+          {" "}
+          Delete image{" "}
+        </p>
       </div>
     ));
 
@@ -93,7 +111,11 @@ class Uploader extends Component {
               rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
             return (
               <>
-                <div {...getRootProps({ className: "dropzone my-auto" })}>
+                <div
+                  {...getRootProps({
+                    className: "dropzone my-auto"
+                  })}
+                >
                   <input {...getInputProps()} />
                   {!isDragActive && (
                     <>
