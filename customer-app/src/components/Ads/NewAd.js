@@ -5,8 +5,8 @@ import Calendar from "../Calendar.js";
 import Uploader from "../Uploader.js";
 import LoadSpinner from "../LoadSpinner.js";
 
-// const server = "d5d1ea20.ngrok.io";
-const server = "localhost:5000";
+const server = "5f6cf0ae.ngrok.io";
+// const server = "localhost:5000";
 
 const Button = styled.button`
   background-color: white;
@@ -58,7 +58,8 @@ class NewAd extends Component {
             chosenDate: null,
             imgs: null,
             isLoading: false,
-            failedImgs: []
+            failedImgs: [],
+            Loaded: 0
         };
     }
 
@@ -75,6 +76,17 @@ class NewAd extends Component {
         console.log(this.state);
     };
 
+    handleDlt = id => {
+
+        const copy = this.state.imgs;
+        console.log(copy)
+        copy.splice(id, 1);
+        console.log(copy)
+        this.setState({
+            imgs: [...copy]
+        });
+    }
+
     componentDidUpdate() {
         this.scrollToBottom();
     }
@@ -87,10 +99,14 @@ class NewAd extends Component {
         e.preventDefault();
         const { imgs, chosenDate, failedImgs } = this.state;
         this.setState({
-            isLoading: true
+            failedImgs: [],
+            isLoading: true,
+            Loaded: 0
         })
+        console.log(this.state.failedImgs)
         let imgCopy = [...imgs];
-        let failedCopy = [...failedImgs];
+        let failedCopy = [];
+        failedCopy = [...failedImgs];
         let formData = new FormData();
         imgs.map(file => {
             formData.append(`file`, file);
@@ -121,6 +137,7 @@ class NewAd extends Component {
                 this.setState({
                     failedImgs: failedCopy,
                     isLoading: false,
+                    Loaded: 1
                 });
                 console.log(failedCopy);
                 // 
@@ -128,7 +145,7 @@ class NewAd extends Component {
     };
 
     render() {
-        const { chosenDate, imgs, failedImgs, isLoading, clicked } = this.state;
+        const { chosenDate, imgs, failedImgs, isLoading, Loaded } = this.state;
         const failedNails = failedImgs.map(file => (
             <div>
                 <Thumb key={file.name}>
@@ -138,6 +155,7 @@ class NewAd extends Component {
                 </Thumb>
             </div>
         ));
+
 
         return (
             <div className={"px-4 mb-5"}>
@@ -161,7 +179,7 @@ class NewAd extends Component {
                     <h4>2. Choose your campaign pictures</h4>
 
                     <div className={"col-12 col-md-9 my-3 p-2 mx-auto"}>
-                        <Uploader handleImgs={this.handleImgs} chosenDate={chosenDate} />
+                        <Uploader handleImgs={this.handleImgs} handleDlt={this.handleDlt} chosenDate={chosenDate} />
                     </div>
                     <div className="d-flex">
 
@@ -169,25 +187,32 @@ class NewAd extends Component {
                             type="submit"
                             disabled={chosenDate === null || imgs === null ? true : false}
                         >
-                            Submit
+                            Next
                         </Button>
                         {
-                            this.state.isLoading ?
+                            isLoading ?
                                 <LoadSpinner style={{ height: "70px", width: "80px" }} /> : null
                         }
                     </div>
                 </form>
 
-                <div className={!failedImgs.length && "d-none"}>
-                    <h4>3. Failed images</h4>
-                    <small>
-                        We do not allow advertising of alcohol, weapons, tobacco-containing
-                        products, NSFW content on our platform.
-                    </small>
-                    <p>These images will not be uploaded:</p>
-                    {/* Images that did not pass moderation */}
-                    <ThumbsContainer>{failedNails}</ThumbsContainer>
-                </div>
+                {
+                    failedImgs.length == 0
+                        ? <h1 className={Loaded == 1 ? "" : "d-none"}> helloo</h1>
+                        : <div className={!failedImgs.length && "d-none"}>
+                            <h4>3. Summary - Failed images</h4>
+                            <small>
+                                We do not allow advertising of alcohol, weapons, tobacco-containing
+                                products, NSFW content on our platform.
+                            </small>
+                            <p>These images will not be uploaded:</p>
+                            {/* Images that did not pass moderation */}
+                            <ThumbsContainer>{failedNails}</ThumbsContainer>
+                            <small>
+                                Please make necessary changes and then click on the Next button again.
+                            </small>
+                        </div>
+                }
                 <div style={{ float: "left", clear: "both" }}
                     ref={(el) => { this.pageEnd = el; }}>
                 </div>

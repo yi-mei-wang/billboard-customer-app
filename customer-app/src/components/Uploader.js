@@ -55,6 +55,7 @@ class Uploader extends Component {
     e.stopPropagation();
     const copy = this.state.imgs;
     copy.splice(e.target.id, 1);
+    this.props.handleDlt(e.target.id);
     this.setState({
       imgs: [...copy]
     });

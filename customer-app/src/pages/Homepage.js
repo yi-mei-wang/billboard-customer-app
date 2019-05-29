@@ -23,7 +23,7 @@ class Homepage extends React.Component {
 
         return (
             <>
-                <SideBar removeUser={this.removeUser} />
+                <SideBar removeUser={this.props.removeUser} />
                 <Main>
                     <Switch>
                         <Route

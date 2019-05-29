@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import logo from "./images/logo.png";
 
-// const server = "d5d1ea20.ngrok.io";
-const server = "localhost:5000";
+const server = "5f6cf0ae.ngrok.io";
+// const server = "localhost:5000";
 
 
 class LoginModal extends React.Component {
