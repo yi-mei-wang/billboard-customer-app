@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import logo from "./images/logo.png";
 
+// const server = "d5d1ea20.ngrok.io";
+const server = "localhost:5000";
+
+
 class LoginModal extends React.Component {
   state = {
     username: "",
@@ -23,7 +27,7 @@ class LoginModal extends React.Component {
     const { username, password } = this.state;
     axios({
       method: "POST",
-      url: "http://localhost:5000/api/v1/login",
+      url: `http://${server}/api/v1/login`,
       data: {
         username,
         password

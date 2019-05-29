@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../components/Navbar.js";
+import SideBar from "../components/SideBar";
 import { Redirect } from "react-router-dom";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Selection from "../components/Ads/Selection";
 import NewAd from "../components/Ads/NewAd";
@@ -10,44 +10,45 @@ import ExpiredAds from "../components/Ads/ExpiredAds";
 import BottomBar from "../components/Bottom";
 
 const Main = styled.div`
-  /* CHANGE SHIT */
+  /* CHANGE STYLE */
+  margin-bottom: 65px;
 `;
 
 class Homepage extends React.Component {
-  render() {
-    const { history, currentUser } = this.props;
-    if (!currentUser) return <Redirect to="/login" />;
-    let Container =
-      this.props.match.url === "/" ? <Selection history={history} /> : <h1 />;
+    render() {
+        const { history, currentUser } = this.props;
+        if (!currentUser) return <Redirect to="/login" />;
+        let Container =
+            this.props.match.url === "/" ? <Selection history={history} /> : <h1 />;
 
-    return (
-      <>
-        {/* <Navbar history={history} removeUser={this.props.removeUser} /> */}
-        <Main>
-          <Switch>
-            <Route
-              exact
-              path="/new"
-              component={props => <NewAd {...props} />}
-            />
-            <Route
-              exact
-              path="/scheduled"
-              component={props => <ScheduledAds {...props} />}
-            />
-            <Route
-              exact
-              path="/expired"
-              component={props => <ExpiredAds {...props} />}
-            />
-          </Switch>
+        return (
+            <>
+                <SideBar removeUser={this.removeUser} />
+                <Main>
+                    <Switch>
+                        <Route
+                            exact
+                            path="/new"
+                            component={props => <NewAd {...props} />}
+                        />
+                        <Route
+                            exact
+                            path="/scheduled"
+                            component={props => <ScheduledAds {...props} />}
+                        />
+                        <Route
+                            exact
+                            path="/expired"
+                            component={props => <ExpiredAds {...props} />}
+                        />
+                    </Switch>
 
-          {Container}
-          <BottomBar history={history} />
-        </Main>
-      </>
-    );
-  }
+                    {Container}
+                    <BottomBar history={history} />
+                </Main>
+            </>
+        );
+    }
 }
 
 export default Homepage;
