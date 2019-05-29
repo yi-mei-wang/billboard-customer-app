@@ -53,9 +53,10 @@ class Uploader extends Component {
 
   deleteImg = e => {
     e.stopPropagation();
+    let id = e.target.id;
     const copy = this.state.imgs;
-    copy.splice(e.target.id, 1);
-    this.props.handleDlt(e.target.id);
+    copy.splice(id, 1);
+    this.props.handleDlt(id);
     this.setState({
       imgs: [...copy]
     });
