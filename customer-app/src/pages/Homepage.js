@@ -4,15 +4,13 @@ import { Redirect } from "react-router-dom";
 import { Route, Switch, Link } from "react-router-dom";
 import styled from "styled-components";
 import Selection from "../components/Ads/Selection";
-import OrderForm from "../components/OrderForm";
+import NewAd from "../components/Ads/NewAd";
 import ScheduledAds from "../components/Ads/ScheduledAds";
 import ExpiredAds from "../components/Ads/ExpiredAds";
 import BottomBar from "../components/Bottom";
 
 const Main = styled.div`
-  top: 50px;
-  height: 88vh;
-  overflow: scroll;
+  /* CHANGE SHIT */
 `;
 
 class Homepage extends React.Component {
@@ -30,7 +28,7 @@ class Homepage extends React.Component {
             <Route
               exact
               path="/new"
-              component={props => <OrderForm {...props} />}
+              component={props => <NewAd {...props} />}
             />
             <Route
               exact

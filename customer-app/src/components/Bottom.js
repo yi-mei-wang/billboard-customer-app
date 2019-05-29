@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as AddSvg } from "./images/add.svg";
 import { ReactComponent as PastAds } from "./images/list.svg";
@@ -56,10 +55,41 @@ const AddButton = styled.div`
   justify-content: center;
   align-items: center;
 
+  transition: 0.5s;
+
   svg {
     height: 50%;
     width: 50%;
     fill: white;
+  }
+
+  @keyframes wiggle {
+    0% {
+      transform: rotate(10deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(20deg);
+    }
+    75% {
+      transform: rotate(-5deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  &:hover {
+    & {
+      width: 58px;
+      height: 58px;
+    }
+
+    svg {
+      animation: wiggle 1s 1;
+    }
   }
 `;
 
@@ -70,11 +100,28 @@ const NavLinks = styled.p`
 `;
 
 const Button = styled.button`
-  width: 50px;
-  height: 50px;
+  /* width: 50px; */
+  /* height: 50px; */
   background-color: transparent;
   border: none;
   z-index: 11;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  small {
+    color: white;
+  }
+
+  &:hover {
+    small {
+      color: #b4c5f2;
+    }
+
+    svg {
+      transform: scale(0.9);
+    }
+  }
 `;
 
 const BottomBar = props => {
@@ -90,17 +137,15 @@ const BottomBar = props => {
   return (
     <>
       <Bottom className={"px-5"}>
-        <span>
-          <Button>
-            <PastAds onClick={handleExpired} />
-          </Button>
-        </span>
+        <Button>
+          <PastAds onClick={handleExpired} />
+          <small className="mt-1 text-center">Past Ads</small>
+        </Button>
 
-        <span>
-          <Button>
-            <FutureAds onClick={handleScheduled} style={{ zIndex: 10 }} />
-          </Button>
-        </span>
+        <Button>
+          <FutureAds onClick={handleScheduled} style={{ zIndex: 10 }} />
+          <small className="mt-1 text-center">Future Ads</small>
+        </Button>
       </Bottom>
       {/* <NavLinks>Past Ads</NavLinks> */}
       {/* <div

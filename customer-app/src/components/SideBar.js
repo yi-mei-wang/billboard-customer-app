@@ -40,6 +40,13 @@ class SideBar extends React.Component {
           {/* <Logo>Advengers</Logo> */}
           <img src={logo1} style={{ width: "200px", marginBottom: "10px" }} />
           <img src={logo} style={{ width: "200px" }} />
+          <button
+            onClick={() => {
+              this.props.removeUser();
+            }}
+          >
+            Log Out
+          </button>
         </div>
       </div>
     );

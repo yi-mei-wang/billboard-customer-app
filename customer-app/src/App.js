@@ -39,7 +39,7 @@ class App extends React.Component {
     const { currentUser } = this.state;
     return (
       <>
-        <SideBar />
+        <SideBar removeUser={this.removeUser} />
         <Switch>
           {/* Log in/sign up page */}
           <Route

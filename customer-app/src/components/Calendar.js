@@ -11,7 +11,6 @@ class Calendar extends Component {
       today: new Date(),
       slotsTaken: [],
       selectedDate: null,
-      selectedTime: null,
       minTime: new Date().setHours(0, 0, 0, 0),
       isMobile: false
     };
@@ -99,14 +98,7 @@ class Calendar extends Component {
     // Date field on click should display calendar
     // After a date has been chosen, a call should be made to check availabilities
     // Time field should render and appear with timings disabled
-    const {
-      slotsTaken,
-      today,
-      selectedDate,
-      selectedTime,
-      minTime,
-      isMobile
-    } = this.state;
+    const { slotsTaken, today, selectedDate, minTime, isMobile } = this.state;
 
     let maxTime = new Date();
     maxTime.setHours(23);
