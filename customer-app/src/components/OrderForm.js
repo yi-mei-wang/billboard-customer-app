@@ -122,8 +122,17 @@ class OrderForm extends Component {
     ));
 
     return (
-      <div className={"px-3"}>
-        <h2 className={"py-3"}>New ADs</h2>
+      <div className={"px-4"}>
+        <h2 className={"pt-3 m-0"}>New ADs</h2>
+        <span
+          class="underline mb-2"
+          style={{
+            backgroundColor: "#ffbf00",
+            width: "200px",
+            height: "10px",
+            display: "inline-block"
+          }}
+        />
         <form onSubmit={this.handleSubmit} className={"mx-auto"}>
           <h4>1. Select a time and date</h4>
           <div className="row p-3 mx-auto">
@@ -145,11 +154,9 @@ class OrderForm extends Component {
             <Button type="submit">Submit</Button>
           </div>
         </form>
-        <div>
-          <h4>3. Order summary</h4>
-        </div>
+
         <div className={!failedImgs.length && "d-none"}>
-          <h4>4. Failed images</h4>
+          <h4>3. Failed images</h4>
           {/* Images that did not pass moderation */}
           <ThumbsContainer>{failedNails}</ThumbsContainer>
         </div>

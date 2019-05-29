@@ -103,7 +103,7 @@ class Uploader extends Component {
           accept="image/*"
           minSize={0}
           maxSize={maxSize}
-          style={{ height: "300px" }}
+          style={{ height: "300px", marginBotton: "20px" }}
           // Check for the number of images in the state, if more than 12 disable the thing
           disabled={imgs.length > 11 && true}
         >

@@ -12,7 +12,8 @@ class Calendar extends Component {
       slotsTaken: [],
       selectedDate: null,
       selectedTime: null,
-      minTime: new Date().setHours(0, 0, 0, 0)
+      minTime: new Date().setHours(0, 0, 0, 0),
+      isMobile: false
     };
   }
 
@@ -72,6 +73,10 @@ class Calendar extends Component {
     // First display null in the time picker
   };
 
+  updatePredicate = () => {
+    this.setState({ isMobile: window.innerWidth < 426 });
+  };
+
   handleChange = e => {
     this.props.handleDate(e);
     this.setState({
@@ -79,6 +84,16 @@ class Calendar extends Component {
       selectedDate: e
     });
   };
+
+  componentDidMount() {
+    this.updatePredicate();
+    window.addEventListener("resize", this.updatePredicate);
+    console.log(this.state);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updatePredicate);
+  }
 
   render() {
     // Date field on click should display calendar
@@ -89,7 +104,8 @@ class Calendar extends Component {
       today,
       selectedDate,
       selectedTime,
-      minTime
+      minTime,
+      isMobile
     } = this.state;
 
     let maxTime = new Date();
@@ -105,6 +121,8 @@ class Calendar extends Component {
           minDate={today}
           placeholderText={"Select a date"}
           className="w-200px text-center datepicker-input"
+          disabledKeyboardNavigation
+          inline={isMobile && true}
         />
 
         {selectedDate !== null && (
@@ -121,6 +139,7 @@ class Calendar extends Component {
             timeCaption="Time"
             placeholderText={"Select a time"}
             className="w-200px text-center datepicker-input"
+            inline={isMobile && true}
           />
         )}
       </>

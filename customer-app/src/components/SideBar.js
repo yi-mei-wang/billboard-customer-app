@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import logo from "./images/adlogo.png";
+import logo1 from "./images/adlogo1.png";
 
 const Logo = styled.h3`
   font-family: "Staatliches", "open sans";
@@ -26,13 +28,18 @@ class SideBar extends React.Component {
     return (
       <div
         className="sidebar-container"
-        style={{ right: collapsed ? "-270px" : "0px" }}
+        style={{
+          right: collapsed ? "-270px" : "0px",
+          height: collapsed ? "100vh" : "100vh"
+        }}
       >
         <button className="my-button" onClick={this.toggleSidebar}>
           {collapsed ? "☰" : "X"}
         </button>
         <div className="sidebar text-center">
-          <Logo>Advengers</Logo>
+          {/* <Logo>Advengers</Logo> */}
+          <img src={logo1} style={{ width: "200px", marginBottom: "10px" }} />
+          <img src={logo} style={{ width: "200px" }} />
         </div>
       </div>
     );

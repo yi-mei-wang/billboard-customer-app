@@ -69,6 +69,14 @@ const NavLinks = styled.p`
   color: red;
 `;
 
+const Button = styled.button`
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  z-index: 11;
+`;
+
 const BottomBar = props => {
   const handleExpired = e => {
     props.history.push("/expired");
@@ -77,17 +85,21 @@ const BottomBar = props => {
     props.history.push("/scheduled");
   };
   const handleNew = e => {
-    props.history.push("/New");
+    props.history.push("/new");
   };
   return (
     <>
-      <Bottom>
+      <Bottom className={"px-5"}>
         <span>
-          <PastAds onClick={handleExpired} />
+          <Button>
+            <PastAds onClick={handleExpired} />
+          </Button>
         </span>
 
         <span>
-          <FutureAds onClick={handleScheduled} style={{ zIndex: 10 }} />
+          <Button>
+            <FutureAds onClick={handleScheduled} style={{ zIndex: 10 }} />
+          </Button>
         </span>
       </Bottom>
       {/* <NavLinks>Past Ads</NavLinks> */}
