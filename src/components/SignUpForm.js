@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Button, Form, FormGroup, FormText, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import Axios from "axios";
-import { DOMAIN_URL } from '../constants';
+import { DOMAIN_URL } from "../constants";
 
 class SignUpModal extends React.Component {
   state = {
