@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Calendar from "../Calendar.js.js";
-import Uploader from "../Uploader.js.js";
+import Calendar from "../Calendar";
+import Uploader from "../Uploader";
+
+
 
 const server = "localhost:5000";
 
