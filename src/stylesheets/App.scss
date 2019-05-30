@@ -1,0 +1,72 @@
+@import "fonts.scss";
+@import "OrderForm.scss";
+@import "sidebar.scss";
+
+$scondary: #4056a1;
+
+body {
+  line-height: 1.2rem;
+  font-family: "Roboto Condensed", "Open Sans", sans-serif !important;
+  font-size: 1rem;
+  font-weight: 200;
+  text-rendering: optimizeLegibility;
+  color: #222222;
+  background-color: white;
+}
+
+.w-200px {
+  width: 200px;
+}
+
+.bodyBg {
+  background-color: lightgray;
+}
+
+.selectionBtn {
+  height: 500px;
+  width: 200px;
+  border-radius: 50px;
+}
+
+#greenbtn {
+  background-color: lightgreen;
+}
+
+#bluebtn {
+  background-color: lightblue;
+}
+
+#greybtn {
+  background-color: grey;
+}
+
+.logo {
+  width: 250px;
+  height: 250px;
+  border-radius: 200px;
+}
+
+button {
+  border-radius: 0 !important;
+}
+
+h2 {
+  font-family: "Staatliches", "Open Sans", sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+h4 {
+  font-weight: 300;
+}
+
+.bg-scondary {
+  background-color: $scondary;
+}
+
+a {
+  color: #00ab50;
+}
+
+a:hover {
+  color: #f13c20;
+}
