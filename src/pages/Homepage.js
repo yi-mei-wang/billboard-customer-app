@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/Navbar.js";
+import Navbar from "../components/Navbar.js.js";
 import { Redirect } from "react-router-dom";
 import { Route, Switch, Link } from "react-router-dom";
 import styled from "styled-components";
