@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import logo from "./images/logo.png";
 
+// const server = "https://billboard-automator-server.herokuapp.com";
+const server = "http://localhost:5000";
+
 class LoginModal extends React.Component {
   state = {
     username: "",
@@ -23,7 +26,7 @@ class LoginModal extends React.Component {
     const { username, password } = this.state;
     axios({
       method: "POST",
-      url: "http://localhost:5000/api/v1/login",
+      url: `${server}/api/v1/login`,
       data: {
         username,
         password
@@ -46,7 +49,6 @@ class LoginModal extends React.Component {
   };
 
   render() {
-
     return (
       <div>
         <div className="text-center my-3">
@@ -95,11 +97,11 @@ class LoginModal extends React.Component {
               this.handleLogin();
               console.log(
                 "Username: " +
-                this.state.username +
-                "\n" +
-                "Password: " +
-                this.state.password +
-                "\n"
+                  this.state.username +
+                  "\n" +
+                  "Password: " +
+                  this.state.password +
+                  "\n"
               );
             }}
           >
