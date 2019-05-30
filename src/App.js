@@ -6,6 +6,7 @@ import Bottom from "./components/Bottom";
 import FormContainer from "./pages/FormContainer";
 import Homepage from "./pages/Homepage";
 import SideBar from "./components/SideBar";
+import Summary from "./components/Ads/Summary";
 
 // Stylesheets
 import "./stylesheets/App.scss";
@@ -63,6 +64,12 @@ class App extends React.Component {
                 currentUser={currentUser}
                 removeUser={this.removeUser}
               />
+            )}
+          />
+          <Route
+            path="/orders/:id"
+            component={props => (
+              <Summary {...props} orderId={props.match.params.id} />
             )}
           />
         </Switch>

@@ -1,41 +1,12 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { Switch, Route } from "react-router-dom";
 import Moment from "react-moment";
+import { Link } from "react-router-dom";
+import { Table } from "reactstrap";
 import { DOMAIN_URL } from "../../constants";
-
-const ThumbsContainer = styled.aside`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-top: 16px;
-  justify-content: center;
-`;
-
-const Thumb = styled.div`
-  display: inline-flex;
-  border-radius: 2px;
-  border: 1px solid #eaeaea;
-  margin-bottom: 8px;
-  margin-right: 8px;
-  width: 200px;
-  height: 120px;
-  padding: 4px;
-  box-sizing: border-box;
-`;
-
-const ThumbInner = styled.div`
-  display: flex;
-  min-width: 0;
-  overflow: hidden;
-`;
-
-const Img = styled.img`
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
+import Summary from "./Summary";
 
 class ScheduledAds extends React.Component {
   state = {
@@ -49,7 +20,7 @@ class ScheduledAds extends React.Component {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
-        console.log("helo", response.data);
+        console.log(response);
         this.setState({
           orders: response.data
         });
@@ -60,22 +31,18 @@ class ScheduledAds extends React.Component {
   }
 
   render() {
-    const orders = this.state.orders.map(order => (
-      <>
-        <p>
-          Selected date :{" "}
-          <Moment format="YYYY/MM/DD">{order.start_time}</Moment>
-          <br />
-          Selected time slot: <Moment format="HH:mm">{order.start_time}</Moment>
-        </p>
+    const { orders } = this.state;
 
-        {order.images.map((img, index) => (
-          <Thumb key={index}>
-            <ThumbInner>
-              <Img src={img} alt="User uploads" />
-            </ThumbInner>
-          </Thumb>
-        ))}
+    const summaryTable = orders.map((order, index) => (
+      <>
+        <tr key={index}>
+          <td>
+            <Link to={`orders/${order.order_id}`}>{order.order_id} </Link>
+          </td>
+          <td>
+            <Moment format="YYYY/MM/DD">{order.start_time}</Moment>
+          </td>
+        </tr>
       </>
     ));
 
@@ -92,7 +59,15 @@ class ScheduledAds extends React.Component {
               display: "inline-block"
             }}
           />
-          {orders}
+
+          <Table className={"mt-3"}>
+            <tbody>
+              <tr>
+                <th>Id</th> <th>Date</th>
+              </tr>
+              {summaryTable}
+            </tbody>
+          </Table>
         </div>
       </>
     );

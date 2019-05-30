@@ -124,15 +124,15 @@ const Button = styled.button`
   }
 `;
 
-const BottomBar = props => {
+const BottomBar = ({ history }) => {
   const handleExpired = e => {
-    props.history.push("/expired");
+    history.push("/expired");
   };
   const handleScheduled = e => {
-    props.history.push("/scheduled");
+    history.push("/scheduled");
   };
   const handleNew = e => {
-    props.history.push("/new");
+    history.push("/new");
   };
   return (
     <>
