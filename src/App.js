@@ -5,7 +5,6 @@ import { Route, Switch } from "react-router-dom";
 import Bottom from "./components/Bottom";
 import FormContainer from "./pages/FormContainer";
 import Homepage from "./pages/Homepage";
-import SideBar from "./components/SideBar";
 
 // Stylesheets
 import "./stylesheets/App.scss";
@@ -39,7 +38,6 @@ class App extends React.Component {
     const { currentUser } = this.state;
     return (
       <>
-        <SideBar removeUser={this.removeUser} />
         <Switch>
           {/* Log in/sign up page */}
           <Route

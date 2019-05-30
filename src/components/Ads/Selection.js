@@ -7,7 +7,14 @@ class Selection extends React.Component {
       <div className="d-flex justify-content-around">
         <button
           className="selectionBtn"
-          id="greenbtn"
+          id="greybtn"
+          onClick={() => history.push("/expired")}
+        >
+          Expired ADs
+        </button>
+        <button
+          className="selectionBtn"
+          id="goldbtn"
           onClick={() => history.push("/new")}
         >
           New AD
@@ -18,13 +25,6 @@ class Selection extends React.Component {
           onClick={() => history.push("/scheduled")}
         >
           Scheduled ADs
-        </button>
-        <button
-          className="selectionBtn"
-          id="greybtn"
-          onClick={() => history.push("/expired")}
-        >
-          Expired ADs
         </button>
       </div>
     );

@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Calendar from "../Calendar";
 import Uploader from "../Uploader";
+import { Redirect } from "react-router-dom";
 import { DOMAIN_URL } from '../../constants';
 import LoadSpinner from "../LoadSpinner.js";
 import Moment from "react-moment";
@@ -99,6 +100,18 @@ class NewAd extends Component {
     })
       .then(response => {
         console.log(response);
+        const status = response.data.status
+        if (status === 'ok') {
+          this.props.history.push({
+            pathname: "/mes",
+            state: { response: 'Success' }
+          })
+        } else {
+          this.props.history.push({
+            pathname: "/mes",
+            state: { response: 'Fail' }
+          })
+        }
 
       })
       .catch((error, response) => {

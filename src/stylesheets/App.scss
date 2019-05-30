@@ -28,16 +28,16 @@ body {
   border-radius: 50px;
 }
 
-#greenbtn {
-  background-color: lightgreen;
+#goldbtn {
+  background-color: #d79922;
 }
 
 #bluebtn {
-  background-color: lightblue;
+  background-color: #4056a1;
 }
 
 #greybtn {
-  background-color: grey;
+  background-color: #c5cbe3;
 }
 
 .logo {
@@ -68,4 +68,15 @@ a {
 
 a:hover {
   color: #f13c20;
+}
+
+.centerPiece{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#divBG{
+  background-color: #efe2ba;
 }
