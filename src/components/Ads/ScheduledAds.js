@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Moment from "react-moment";
-import { DOMAIN_URL } from '../../constants';
+import { DOMAIN_URL } from "../../constants";
 
 const ThumbsContainer = styled.aside`
   display: flex;
@@ -49,7 +49,7 @@ class ScheduledAds extends React.Component {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
-        console.log(response.data);
+        console.log("helo", response.data);
         this.setState({
           orders: response.data
         });
@@ -68,22 +68,21 @@ class ScheduledAds extends React.Component {
           <br />
           Selected time slot: <Moment format="HH:mm">{order.start_time}</Moment>
         </p>
-        <ThumbsContainer>
-          {order.images.map((img, index) => (
-            <Thumb key={index}>
-              <ThumbInner>
-                <Img src={img} alt="User uploads" />
-              </ThumbInner>
-            </Thumb>
-          ))}
-        </ThumbsContainer>
+
+        {order.images.map((img, index) => (
+          <Thumb key={index}>
+            <ThumbInner>
+              <Img src={img} alt="User uploads" />
+            </ThumbInner>
+          </Thumb>
+        ))}
       </>
     ));
 
     return (
       <>
         <div className={"px-4"}>
-          <h2 className={"pt-4 m-0"}>Expired ADs</h2>
+          <h2 className={"pt-4 m-0"}>Scheduled ADs</h2>
           <span
             className={"underline mb-2"}
             style={{

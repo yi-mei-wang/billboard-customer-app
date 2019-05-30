@@ -2,8 +2,7 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Moment from "react-moment";
-import { DOMAIN_URL } from '../../constants';
-
+import { DOMAIN_URL } from "../../constants";
 
 const ThumbsContainer = styled.aside`
   display: flex;
@@ -63,7 +62,6 @@ class ExpiredAds extends React.Component {
   render() {
     const orders = this.state.orders.map(order => (
       <>
-        <p>{order.order_id}</p>
         <p>
           Selected date :{" "}
           <Moment format="YYYY/MM/DD">{order.start_time}</Moment>
