@@ -9,7 +9,6 @@ import SideBar from "./components/SideBar";
 
 // Stylesheets
 import "./stylesheets/App.scss";
-import { DOMAIN_URL } from './constants';
 
 class App extends React.Component {
   constructor(props) {

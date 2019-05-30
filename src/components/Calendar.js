@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
-
-const server = "localhost:5000";
+import { DOMAIN_URL } from '../constants';
 
 class Calendar extends Component {
   constructor(props) {
@@ -51,7 +50,7 @@ class Calendar extends Component {
     let m = selectedDate.getMonth() + 1;
     let y = selectedDate.getFullYear();
     axios
-      .get(`http://${server}/api/v1/timeslots/show?d=${d}&m=${m}&y=${y}`)
+      .get(`http://${DOMAIN_URL}/api/v1/timeslots/show?d=${d}&m=${m}&y=${y}`)
 
       .then(result => {
         console.log("axios");

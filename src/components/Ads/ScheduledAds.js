@@ -2,9 +2,7 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Moment from "react-moment";
-
-const server = "http://localhost:5000";
-// const server = "https://billboard-automator-server.herokuapp.com";
+import { DOMAIN_URL } from '../../constants';
 
 const ThumbsContainer = styled.aside`
   display: flex;
@@ -47,7 +45,7 @@ class ScheduledAds extends React.Component {
   componentDidMount() {
     let token = localStorage.getItem("jwt");
     axios
-      .get(`${server}/api/v1/orders/show?q=1`, {
+      .get(`${DOMAIN_URL}/api/v1/orders/show?q=1`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {

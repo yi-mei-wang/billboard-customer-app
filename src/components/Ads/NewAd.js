@@ -3,10 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Calendar from "../Calendar";
 import Uploader from "../Uploader";
-
-
-
-const server = "localhost:5000";
+import { DOMAIN_URL } from '../../constants';
 
 const Button = styled.button`
   background-color: white;
@@ -88,7 +85,7 @@ class NewAd extends Component {
     formData.append("auth_token", localStorage.getItem("jwt"));
 
     axios
-      .post(`http://${server}/api/v1/orders/create`, formData, {
+      .post(`http://${DOMAIN_URL}/api/v1/orders/create`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
