@@ -92,9 +92,8 @@ class NewAd extends Component {
         }
       })
       .then(response => {
-        console.log(response);
         let errors = response.data.errors;
-        console.log(errors);
+
         for (let i = 0; i < Object.keys(errors).length; i++) {
           console.log(errors[i]);
           console.log(errors[i].length);
@@ -125,9 +124,9 @@ class NewAd extends Component {
 
     return (
       <div className={"px-4"}>
-        <h2 className={"pt-3 m-0"}>New ADs</h2>
+        <h2 className={"pt-4 m-0"}>New ADs</h2>
         <span
-          class="underline mb-2"
+          className={"underline mb-2"}
           style={{
             backgroundColor: "#ffbf00",
             width: "200px",

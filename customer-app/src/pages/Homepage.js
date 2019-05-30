@@ -10,7 +10,7 @@ import ExpiredAds from "../components/Ads/ExpiredAds";
 import BottomBar from "../components/Bottom";
 
 const Main = styled.div`
-  /* CHANGE SHIT */
+  margin-bottom: 70px;
 `;
 
 class Homepage extends React.Component {

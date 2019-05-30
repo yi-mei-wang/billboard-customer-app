@@ -3,6 +3,9 @@ import { Col, Button, Form, FormGroup, FormText, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
+// const server = "https://billboard-automator-server.herokuapp.com";
+const server = "http://localhost:5000";
+
 class SignUpModal extends React.Component {
   state = {
     username: "",
@@ -32,7 +35,7 @@ class SignUpModal extends React.Component {
     const { username, email, password } = this.state;
     Axios({
       method: "POST",
-      url: "http://localhost:5000/api/v1/users/create",
+      url: `${server}/api/v1/users/create`,
       data: {
         username,
         email,

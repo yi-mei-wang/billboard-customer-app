@@ -78,7 +78,7 @@ class Uploader extends Component {
     const { imgs } = this.state;
     const maxSize = 5 * 1048576;
     const thumbs = imgs.map((file, index) => (
-      <div>
+      <div key={index}>
         <Thumb key={file.name}>
           <ThumbInner>
             <Img src={file.preview} alt="User uploads" />
