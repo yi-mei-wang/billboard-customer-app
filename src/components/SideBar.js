@@ -37,10 +37,9 @@ class SideBar extends React.Component {
           {collapsed ? "☰" : "X"}
         </button>
         <div className="sidebar text-center">
-          {/* <Logo>Advengers</Logo> */}
           <img src={logo1} style={{ width: "200px", marginBottom: "10px" }} />
           <img src={logo} style={{ width: "200px" }} />
-          <button
+          <button className="w-100"
             onClick={() => {
               this.props.removeUser();
             }}

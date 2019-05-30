@@ -53,11 +53,12 @@ class Uploader extends Component {
 
   deleteImg = e => {
     e.stopPropagation();
+    let id = e.target.id;
     const copy = this.state.imgs;
-    copy.splice(e.target.id, 1);
     this.setState({
-      imgs: [...copy]
-    });
+      imgs: copy.filter(file => file.name !== id)  //remove using this
+    })
+    this.props.handleDlt(id);
     // Pop the corresponding img from the state
   };
 
@@ -86,7 +87,7 @@ class Uploader extends Component {
         </Thumb>
         {/* Render error message depending on the error returned */}
         <Link
-          id={index}
+          id={file.name}
           onClick={this.deleteImg}
           style={{ zIndex: 10, position: "relative" }}
         >

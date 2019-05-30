@@ -50,7 +50,7 @@ class Calendar extends Component {
     let m = selectedDate.getMonth() + 1;
     let y = selectedDate.getFullYear();
     axios
-      .get(`http://${DOMAIN_URL}/api/v1/timeslots/show?d=${d}&m=${m}&y=${y}`)
+      .get(`${DOMAIN_URL}/api/v1/timeslots/show?d=${d}&m=${m}&y=${y}`)
 
       .then(result => {
         console.log("axios");
