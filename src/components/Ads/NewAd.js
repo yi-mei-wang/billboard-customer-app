@@ -237,7 +237,7 @@ class NewAd extends Component {
         {failedImgs.length === 0 ? (
           <div
             className={Loaded === 1 ? "" : "d-none"}
-            style={{ marginBottom: "50px" }}
+            style={{ marginBottom: "100px" }}
           >
             <h4>3. Summary</h4>
             <small className={"m-3"}>
@@ -258,7 +258,10 @@ class NewAd extends Component {
             </Button>
           </div>
         ) : (
-          <div className={!failedImgs.length && "d-none"}>
+          <div
+            className={!failedImgs.length && "d-none"}
+            style={{ marginBottom: "100px" }}
+          >
             <h4>3. Summary - Failed images</h4>
             <small className={"m-3"}>
               We do not allow advertising of alcohol, weapons,
