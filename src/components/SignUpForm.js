@@ -1,10 +1,16 @@
 import React from "react";
-import { Col, Button, Form, FormGroup, FormText, Input } from "reactstrap";
+import {
+  Col,
+  Button,
+  Form,
+  FormFeedback,
+  FormGroup,
+  FormText,
+  Input
+} from "reactstrap";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import { DOMAIN_URL } from "../constants";
-
-const server = "https://billboard-automated-server-1.herokuapp.com";
 
 class SignUpModal extends React.Component {
   state = {
@@ -12,7 +18,9 @@ class SignUpModal extends React.Component {
     email: "",
     password: "",
     confirmPassword: "",
-    resultMes: ""
+    resultMes: "",
+    invalidEmail: false,
+    invalidUsername: false
   };
 
   handleUsernameChange = event => {
@@ -35,7 +43,7 @@ class SignUpModal extends React.Component {
     const { username, email, password } = this.state;
     Axios({
       method: "POST",
-      url: `${server}/api/v1/users/create`,
+      url: `${DOMAIN_URL}/api/v1/users/create`,
       data: {
         username,
         email,
@@ -44,9 +52,25 @@ class SignUpModal extends React.Component {
     })
       .then(response => {
         console.log(response);
-        localStorage.setItem("jwt", response.data.auth_token);
-        localStorage.setItem("id", response.data.user.id);
-        this.props.setUser(response.data.user);
+        switch (response.data.status) {
+          case 4091:
+            console.log("Username taken");
+            this.setState({
+              invalidUsername: true
+            });
+            break;
+          case 4092:
+            console.log("Email taken");
+            this.setState({
+              invalidEmail: true
+            });
+            break;
+          case 200:
+            localStorage.setItem("jwt", response.data.auth_token);
+            localStorage.setItem("id", response.data.user.id);
+            this.props.setUser(response.data.user);
+            break;
+        }
       })
       .catch((error, response) => {
         console.log("hel", response);
@@ -72,7 +96,9 @@ class SignUpModal extends React.Component {
                 placeholder="Your preferred username"
                 value={this.state.username}
                 onChange={this.handleUsernameChange}
+                invalid={this.state.invalidUsername}
               />
+              <FormFeedback>Oh noes! That name is already taken.</FormFeedback>
             </Col>
           </FormGroup>
           <FormGroup row>
@@ -88,7 +114,11 @@ class SignUpModal extends React.Component {
                 placeholder="Your email address"
                 value={this.state.email}
                 onChange={this.handleEmailChange}
+                invalid={this.state.invalidEmail}
               />
+              <FormFeedback>
+                Oh noes! There is already an account registered to this email.
+              </FormFeedback>
             </Col>
           </FormGroup>
           <FormGroup row>
@@ -124,8 +154,8 @@ class SignUpModal extends React.Component {
               {this.state.password === this.state.confirmPassword ? (
                 <br />
               ) : (
-                  <FormText color="danger">Passwords do not match</FormText>
-                )}
+                <FormText color="danger">Passwords do not match</FormText>
+              )}
             </Col>
           </FormGroup>
         </Form>
@@ -139,24 +169,24 @@ class SignUpModal extends React.Component {
             color="primary"
             disabled={Boolean(
               this.state.username === "" ||
-              this.state.email === "" ||
-              this.state.password === "" ||
-              this.state.confirmPassword === ""
+                this.state.email === "" ||
+                this.state.password === "" ||
+                this.state.confirmPassword === ""
             )}
             onClick={() => {
               this.handleSignUp();
               console.log(
                 "Username: " +
-                this.state.username +
-                "\n" +
-                "Email: " +
-                this.state.email +
-                "\n" +
-                "Password: " +
-                this.state.password +
-                "\n" +
-                "Confirm Password: " +
-                this.state.confirmPassword
+                  this.state.username +
+                  "\n" +
+                  "Email: " +
+                  this.state.email +
+                  "\n" +
+                  "Password: " +
+                  this.state.password +
+                  "\n" +
+                  "Confirm Password: " +
+                  this.state.confirmPassword
               );
             }}
           >

@@ -32,7 +32,7 @@ body {
   background-color: #d79922;
 }
 
-#bluebtn {
+.bluebtn {
   background-color: #4056a1;
 }
 
@@ -70,13 +70,13 @@ a:hover {
   color: #f13c20;
 }
 
-.centerPiece{
+.centerPiece {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-#divBG{
+#divBG {
   background-color: #efe2ba;
 }

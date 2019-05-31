@@ -12,8 +12,8 @@ const Button = styled.button`
   color: #474350;
   background-color: #d79922;
   border: none;
-  display: flex;
-  justify-content: flex-start;
+  /* display: flex;
+  justify-content: flex-start; */
   height: 30px;
   width: 100px;
 `;
@@ -62,8 +62,8 @@ class SideBar extends React.Component {
             onClick={handleSelection}
           />
           {/* <img src={logo} style={{ width: "200px", marginBottom: "10px" }} onClick={handleSelection} /> */}
-          <Welcome> Welcome back,</Welcome>
-          <Welcome>
+          <Welcome className={"mt-4"}> Welcome back,</Welcome>
+          <Welcome className={"mb-4"}>
             <i>{username}!</i>
           </Welcome>
           <Button
