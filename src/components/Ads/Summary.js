@@ -50,6 +50,7 @@ class Summary extends React.Component {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
+        console.log(response);
         this.setState({
           orders: response.data[0],
           images: response.data[0].images
