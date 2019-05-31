@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Calendar from "../Calendar";
 import Uploader from "../Uploader";
 import { Redirect } from "react-router-dom";
-import { DOMAIN_URL } from '../../constants';
+import { DOMAIN_URL } from "../../constants";
 import LoadSpinner from "../LoadSpinner.js";
 import Moment from "react-moment";
 
@@ -83,14 +83,14 @@ class NewAd extends Component {
     const imgCopy = this.state.imgs;
     const failedCopy = this.state.failedImgs;
     this.setState({
-      imgs: imgCopy.filter(file => file.name !== id),  //remove using this
-      failedImgs: failedCopy.filter(file => file.name !== id),  //remove using this
+      imgs: imgCopy.filter(file => file.name !== id), //remove using this
+      failedImgs: failedCopy.filter(file => file.name !== id), //remove using this
       Loaded: 0
-    })
+    });
   };
 
   handleProceed = () => {
-    const { order_id } = this.state
+    const { order_id } = this.state;
     axios({
       method: "POST",
       url: `${server}/api/v1/orders/verify`,
@@ -100,25 +100,24 @@ class NewAd extends Component {
     })
       .then(response => {
         console.log(response);
-        const status = response.data.status
-        if (status === 'ok') {
+        const status = response.data.status;
+        if (status === "ok") {
           this.props.history.push({
             pathname: "/mes",
-            state: { response: 'Success' }
-          })
+            state: { response: "Success" }
+          });
         } else {
           this.props.history.push({
             pathname: "/mes",
-            state: { response: 'Fail' }
-          })
+            state: { response: "Fail" }
+          });
         }
-
       })
       .catch((error, response) => {
         console.log("hel", response);
         console.log(error);
       });
-  }
+  };
 
   componentDidUpdate() {
     this.scrollToBottom();
@@ -153,8 +152,7 @@ class NewAd extends Component {
         }
       })
       .then(response => {
-        let order_id_2 = response.data.order_id
-
+        let order_id_2 = response.data.order_id;
 
         let errors = response.data.errors;
 
@@ -219,16 +217,19 @@ class NewAd extends Component {
           <h4>2. Choose your campaign pictures</h4>
 
           <div className={"col-12 col-md-9 my-3 p-2 mx-auto"}>
-            <Uploader handleImgs={this.handleImgs} handleDlt={this.handleDlt} chosenDate={chosenDate} />
+            <Uploader
+              handleImgs={this.handleImgs}
+              handleDlt={this.handleDlt}
+              chosenDate={chosenDate}
+            />
           </div>
           <div className="d-flex">
-
             <Button
               type="submit"
               disabled={chosenDate === null || imgs === null ? true : false}
             >
               Next
-          </Button>
+            </Button>
             {isLoading ? (
               <LoadSpinner style={{ height: "70px", width: "80px" }} />
             ) : null}
@@ -239,34 +240,38 @@ class NewAd extends Component {
           <div className={Loaded === 1 ? "" : "d-none"}>
             <h4>3. Summary</h4>
             <small>
-              Please confirm that the following details are correct before clicking on the 'Proceed' button. Should there be any changes required, please scroll up and make the changes and then click on the 'Next' button once again.
-                        </small>
+              Please confirm that the following details are correct before
+              clicking on the 'Proceed' button. Should there be any changes
+              required, please scroll up and make the changes and then click on
+              the 'Next' button once again.
+            </small>
             <br />
             <div>
-              Selected date     : <Moment format="YYYY/MM/DD">{chosenDate}</Moment>
+              Selected date : <Moment format="YYYY/MM/DD">{chosenDate}</Moment>
               <br />
               Selected time slot: <Moment format="HH:mm">{chosenDate}</Moment>
             </div>
             <ThumbsContainer>{successNails}</ThumbsContainer>
-            <Button type="submit" onClick={this.handleProceed}>Proceed</Button>
+            <Button type="submit" onClick={this.handleProceed}>
+              Proceed
+            </Button>
           </div>
-        )
-          : (
-            <div className={!failedImgs.length && "d-none"}>
-              <h4>3. Summary - Failed images</h4>
-              <small>
-                We do not allow advertising of alcohol, weapons,
-                tobacco-containing products, NSFW content on our platform.
-              </small>
-              <p>These images will not be uploaded:</p>
-              {/* Images that did not pass moderation */}
-              <ThumbsContainer>{failedNails}</ThumbsContainer>
-              <small>
-                Please make necessary changes and then click on the Next button
-                again.
-              </small>
-            </div>
-          )}
+        ) : (
+          <div className={!failedImgs.length && "d-none"}>
+            <h4>3. Summary - Failed images</h4>
+            <small className={"m-2"}>
+              We do not allow advertising of alcohol, weapons,
+              tobacco-containing products, NSFW content on our platform.
+            </small>
+            <p className={"m-2"}>These images will not be uploaded:</p>
+            {/* Images that did not pass moderation */}
+            <ThumbsContainer>{failedNails}</ThumbsContainer>
+            <small>
+              Please make necessary changes and then click on the Next button
+              again.
+            </small>
+          </div>
+        )}
         <div
           style={{ float: "left", clear: "both" }}
           ref={el => {
