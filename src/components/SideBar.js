@@ -8,10 +8,18 @@ const Logo = styled.h3`
 `;
 
 const Button = styled.button`
-  background-color: transparent;
+  text-align: center;
+  color: #474350;
+  background-color: #d79922;
   border: none;
   display: flex;
-  // justify-content: flex-start;
+  justify-content: flex-start;
+  height: 30px;
+  width: 100px;
+`;
+
+const Welcome = styled.p`
+  line-height: 0.5rem;
 `;
 
 class SideBar extends React.Component {
@@ -35,6 +43,7 @@ class SideBar extends React.Component {
     const handleSelection = e => {
       this.props.history.push("/");
     };
+    const username = localStorage.getItem("username");
     return (
       <div
         className="sidebar-container"
@@ -47,15 +56,24 @@ class SideBar extends React.Component {
           {collapsed ? "☰" : "X"}
         </button>
         <div className="sidebar text-center d-flex flex-column align-items-center ">
-          <img src={logo1} style={{ width: "200px", marginBottom: "10px" }} onClick={handleSelection} />
+          <img
+            src={logo1}
+            style={{ width: "200px", marginBottom: "10px" }}
+            onClick={handleSelection}
+          />
           {/* <img src={logo} style={{ width: "200px", marginBottom: "10px" }} onClick={handleSelection} /> */}
-          <button className="w-100"
+          <Welcome> Welcome back,</Welcome>
+          <Welcome>
+            <i>{username}!</i>
+          </Welcome>
+          <Button
+            className=""
             onClick={() => {
               this.props.removeUser();
             }}
           >
             Log Out
-          </button>
+          </Button>
         </div>
       </div>
     );

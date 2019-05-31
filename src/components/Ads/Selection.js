@@ -23,8 +23,7 @@ class Selection extends React.Component {
                 <CardTitle>NEW ADS</CardTitle>
               </h5>
               <CardText>
-                With supporting text below as a natural lead-in to additional
-                content.
+                Advertise with us to see your content on our billboards.
               </CardText>
               <Button onClick={() => history.push("/new")}>NEW ADS</Button>
             </Card>
@@ -34,10 +33,7 @@ class Selection extends React.Component {
               <h5 className={"font-weight-bold"}>
                 <CardTitle>SCHEDULED ADS</CardTitle>
               </h5>{" "}
-              <CardText>
-                With supporting text below as a natural lead-in to additional
-                content.
-              </CardText>
+              <CardText>Ads that have been approved.</CardText>
               <Button onClick={() => history.push("/scheduled")}>
                 SCHEDULED ADS
               </Button>
@@ -49,8 +45,7 @@ class Selection extends React.Component {
                 <CardTitle>EXPIRED ADS</CardTitle>
               </h5>{" "}
               <CardText>
-                With supporting text below as a natural lead-in to additional
-                content.
+                Ads that were approved and advertised in the past.
               </CardText>
               <Button onClick={() => history.push("/expired")}>
                 EXPIRED ADS

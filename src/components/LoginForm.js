@@ -3,10 +3,9 @@ import { Button, Form, FormGroup, Input, Col, FormText } from "reactstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import logo from "./images/logo.png";
-import { DOMAIN_URL } from '../constants';
+import { DOMAIN_URL } from "../constants";
 
 const server = "https://billboard-automated-server-1.herokuapp.com";
-
 
 class LoginModal extends React.Component {
   state = {
@@ -41,6 +40,7 @@ class LoginModal extends React.Component {
         if (response.status === 200) {
           localStorage.setItem("jwt", response.data.auth_token);
           localStorage.setItem("id", response.data.user.id);
+          localStorage.setItem("username", response.data.username);
           this.props.setUser(response.data.user);
         }
       })
@@ -98,11 +98,11 @@ class LoginModal extends React.Component {
               this.handleLogin();
               console.log(
                 "Username: " +
-                this.state.username +
-                "\n" +
-                "Password: " +
-                this.state.password +
-                "\n"
+                  this.state.username +
+                  "\n" +
+                  "Password: " +
+                  this.state.password +
+                  "\n"
               );
             }}
           >
