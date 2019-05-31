@@ -49,7 +49,7 @@ class ExpiredAds extends React.Component {
     return (
       <>
         <div className={"px-4"}>
-          <h2 className={"pt-4 m-0"}>Expired ADs</h2>
+          <h2 className={"pt-4 m-0"}>PAST ADs</h2>
           <span
             className={"underline mb-2"}
             style={{

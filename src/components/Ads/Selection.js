@@ -42,7 +42,7 @@ class Selection extends React.Component {
           <Col sm="12">
             <Card body className={"my-3"}>
               <h5 className={"font-weight-bold"}>
-                <CardTitle>SCHEDULED ADS</CardTitle>
+                <CardTitle>FUTURE ADS</CardTitle>
               </h5>{" "}
               <CardText>Ads that have been approved.</CardText>
               <Button
@@ -55,14 +55,14 @@ class Selection extends React.Component {
                   fontWeight: 600
                 }}
               >
-                SCHEDULED ADS
+                FUTURE ADS
               </Button>
             </Card>
           </Col>
           <Col sm="12">
-            <Card body className={"my-3"}>
+            <Card body className={"my-3"} style={{ marginBottom: "50px" }}>
               <h5 className={"font-weight-bold"}>
-                <CardTitle>EXPIRED ADS</CardTitle>
+                <CardTitle>PAST ADS</CardTitle>
               </h5>{" "}
               <CardText>
                 Ads that were approved and advertised in the past.
@@ -77,7 +77,7 @@ class Selection extends React.Component {
                   fontWeight: 600
                 }}
               >
-                EXPIRED ADS
+                PAST ADS
               </Button>
             </Card>
           </Col>

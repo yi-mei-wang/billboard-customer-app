@@ -49,7 +49,7 @@ class ScheduledAds extends React.Component {
     return (
       <>
         <div className={"px-4"}>
-          <h2 className={"pt-4 m-0"}>Scheduled ADs</h2>
+          <h2 className={"pt-4 m-0"}>FUTURE ADs</h2>
           <span
             className={"underline mb-2"}
             style={{
