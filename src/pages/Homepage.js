@@ -49,6 +49,7 @@ class Homepage extends React.Component {
               path="/expired"
               component={props => <ExpiredAds {...props} />}
             />
+            <Route exact path="/mes" component={props => <Mes {...props} />} />
             <Route
               exact
               path="/:id"
@@ -56,7 +57,6 @@ class Homepage extends React.Component {
                 <Summary {...props} orderId={props.match.params.id} />
               )}
             />
-            <Route exact path="/mes" component={props => <Mes {...props} />} />
           </Switch>
 
           {Container}
