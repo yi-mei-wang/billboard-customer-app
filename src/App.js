@@ -22,7 +22,7 @@ class App extends React.Component {
   setUser = currentUser => {
     if (currentUser) {
       this.setState({
-        currentUser
+        currentUser: currentUser
       });
     }
   };

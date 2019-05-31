@@ -53,7 +53,7 @@ class SignUpModal extends React.Component {
       .then(response => {
         console.log(response);
         switch (response.data.status) {
-          case 200:
+          case 201:
             localStorage.setItem("jwt", response.data.auth_token);
             localStorage.setItem("id", response.data.user.id);
             localStorage.setItem("username", response.data.user.username);
