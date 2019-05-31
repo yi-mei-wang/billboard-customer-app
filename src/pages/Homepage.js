@@ -10,6 +10,7 @@ import NewAd from "../components/Ads/NewAd";
 import ScheduledAds from "../components/Ads/ScheduledAds";
 import Selection from "../components/Ads/Selection";
 import SideBar from "../components/SideBar";
+import Summary from "../components/Ads/Summary";
 
 const Main = styled.div`
   margin-bottom: 70px;
@@ -47,6 +48,12 @@ class Homepage extends React.Component {
               exact
               path="/expired"
               component={props => <ExpiredAds {...props} />}
+            />
+            <Route
+              path="/:id"
+              component={props => (
+                <Summary {...props} orderId={props.match.params.id} />
+              )}
             />
             <Route exact path="/mes" component={props => <Mes {...props} />} />
           </Switch>
