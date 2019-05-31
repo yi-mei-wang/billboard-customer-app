@@ -60,7 +60,7 @@ class Selection extends React.Component {
             </Card>
           </Col>
           <Col sm="12">
-            <Card body className={"my-3"} style={{ marginBottom: "50px" }}>
+            <Card body className={"mt-3"} style={{ marginBottom: "50px" }}>
               <h5 className={"font-weight-bold"}>
                 <CardTitle>PAST ADS</CardTitle>
               </h5>{" "}
