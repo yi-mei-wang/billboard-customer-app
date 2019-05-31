@@ -1,10 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import logo from "./images/adlogo.png";
 import logo1 from "./images/adlogo1.png";
 
 const Logo = styled.h3`
   font-family: "Staatliches", "open sans";
+`;
+
+const Button = styled.button`
+  background-color: transparent;
+  border: none;
+  display: flex;
+  // justify-content: flex-start;
 `;
 
 class SideBar extends React.Component {
@@ -25,6 +32,9 @@ class SideBar extends React.Component {
     const { users, isSelf } = this.props;
     const { collapsed } = this.state;
     console.log(isSelf);
+    const handleSelection = e => {
+      this.props.history.push("/");
+    };
     return (
       <div
         className="sidebar-container"
@@ -36,11 +46,10 @@ class SideBar extends React.Component {
         <button className="my-button" onClick={this.toggleSidebar}>
           {collapsed ? "☰" : "X"}
         </button>
-        <div className="sidebar text-center">
-          {/* <Logo>Advengers</Logo> */}
-          <img src={logo1} style={{ width: "200px", marginBottom: "10px" }} />
-          <img src={logo} style={{ width: "200px" }} />
-          <button
+        <div className="sidebar text-center d-flex flex-column align-items-center ">
+          <img src={logo1} style={{ width: "200px", marginBottom: "10px" }} onClick={handleSelection} />
+          {/* <img src={logo} style={{ width: "200px", marginBottom: "10px" }} onClick={handleSelection} /> */}
+          <button className="w-100"
             onClick={() => {
               this.props.removeUser();
             }}

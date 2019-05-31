@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import { DOMAIN_URL } from "../constants";
 
+const server = "https://billboard-automated-server-1.herokuapp.com";
+
 class SignUpModal extends React.Component {
   state = {
     username: "",
@@ -33,7 +35,7 @@ class SignUpModal extends React.Component {
     const { username, email, password } = this.state;
     Axios({
       method: "POST",
-      url: `${DOMAIN_URL}/api/v1/users/create`,
+      url: `${server}/api/v1/users/create`,
       data: {
         username,
         email,
@@ -122,8 +124,8 @@ class SignUpModal extends React.Component {
               {this.state.password === this.state.confirmPassword ? (
                 <br />
               ) : (
-                <FormText color="danger">Passwords do not match</FormText>
-              )}
+                  <FormText color="danger">Passwords do not match</FormText>
+                )}
             </Col>
           </FormGroup>
         </Form>
@@ -137,24 +139,24 @@ class SignUpModal extends React.Component {
             color="primary"
             disabled={Boolean(
               this.state.username === "" ||
-                this.state.email === "" ||
-                this.state.password === "" ||
-                this.state.confirmPassword === ""
+              this.state.email === "" ||
+              this.state.password === "" ||
+              this.state.confirmPassword === ""
             )}
             onClick={() => {
               this.handleSignUp();
               console.log(
                 "Username: " +
-                  this.state.username +
-                  "\n" +
-                  "Email: " +
-                  this.state.email +
-                  "\n" +
-                  "Password: " +
-                  this.state.password +
-                  "\n" +
-                  "Confirm Password: " +
-                  this.state.confirmPassword
+                this.state.username +
+                "\n" +
+                "Email: " +
+                this.state.email +
+                "\n" +
+                "Password: " +
+                this.state.password +
+                "\n" +
+                "Confirm Password: " +
+                this.state.confirmPassword
               );
             }}
           >

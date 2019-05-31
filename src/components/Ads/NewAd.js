@@ -3,7 +3,12 @@ import axios from "axios";
 import styled from "styled-components";
 import Calendar from "../Calendar";
 import Uploader from "../Uploader";
-import { DOMAIN_URL } from "../../constants";
+import { Redirect } from "react-router-dom";
+import { DOMAIN_URL } from '../../constants';
+import LoadSpinner from "../LoadSpinner.js";
+import Moment from "react-moment";
+
+const server = "https://billboard-automated-server-1.herokuapp.com";
 
 const Button = styled.button`
   background-color: white;
@@ -53,9 +58,11 @@ class NewAd extends Component {
     super(props);
     this.state = {
       chosenDate: null,
-      imgs: null,
+      imgs: [],
       isLoading: false,
-      failedImgs: []
+      failedImgs: [],
+      Loaded: 0,
+      order_id: ""
     };
   }
 
@@ -72,11 +79,66 @@ class NewAd extends Component {
     console.log(this.state);
   };
 
+  handleDlt = id => {
+    const imgCopy = this.state.imgs;
+    const failedCopy = this.state.failedImgs;
+    this.setState({
+      imgs: imgCopy.filter(file => file.name !== id),  //remove using this
+      failedImgs: failedCopy.filter(file => file.name !== id),  //remove using this
+      Loaded: 0
+    })
+  };
+
+  handleProceed = () => {
+    const { order_id } = this.state
+    axios({
+      method: "POST",
+      url: `${server}/api/v1/orders/verify`,
+      data: {
+        order_id
+      }
+    })
+      .then(response => {
+        console.log(response);
+        const status = response.data.status
+        if (status === 'ok') {
+          this.props.history.push({
+            pathname: "/mes",
+            state: { response: 'Success' }
+          })
+        } else {
+          this.props.history.push({
+            pathname: "/mes",
+            state: { response: 'Fail' }
+          })
+        }
+
+      })
+      .catch((error, response) => {
+        console.log("hel", response);
+        console.log(error);
+      });
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom = () => {
+    this.pageEnd.scrollIntoView({ behavior: "smooth" });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({
+      failedImgs: [],
+      isLoading: true,
+      Loaded: 0
+    });
     const { imgs, chosenDate, failedImgs } = this.state;
     let imgCopy = [...imgs];
-    let failedCopy = [...failedImgs];
+    let failedCopy = [];
+    failedCopy = [...failedImgs];
     let formData = new FormData();
     imgs.map(file => {
       formData.append(`file`, file);
@@ -91,6 +153,9 @@ class NewAd extends Component {
         }
       })
       .then(response => {
+        let order_id_2 = response.data.order_id
+
+
         let errors = response.data.errors;
 
         for (let i = 0; i < Object.keys(errors).length; i++) {
@@ -103,15 +168,26 @@ class NewAd extends Component {
         }
         // Display that image
         this.setState({
-          failedImgs: failedCopy
+          failedImgs: failedCopy,
+          isLoading: false,
+          Loaded: 1,
+          order_id: order_id_2
         });
-        console.log(failedCopy);
       });
   };
 
   render() {
-    const { chosenDate, imgs, failedImgs } = this.state;
+    const { chosenDate, imgs, failedImgs, isLoading, Loaded } = this.state;
     const failedNails = failedImgs.map(file => (
+      <div>
+        <Thumb key={file.name}>
+          <ThumbInner>
+            <Img src={file.preview} alt="User uploads" />
+          </ThumbInner>
+        </Thumb>
+      </div>
+    ));
+    const successNails = imgs.map(file => (
       <div>
         <Thumb key={file.name}>
           <ThumbInner>
@@ -122,7 +198,7 @@ class NewAd extends Component {
     ));
 
     return (
-      <div className={"px-4"}>
+      <div className={"px-4 mb-5"}>
         <h2 className={"pt-4 m-0"}>New ADs</h2>
         <span
           className={"underline mb-2"}
@@ -143,27 +219,60 @@ class NewAd extends Component {
           <h4>2. Choose your campaign pictures</h4>
 
           <div className={"col-12 col-md-9 my-3 p-2 mx-auto"}>
-            <Uploader handleImgs={this.handleImgs} chosenDate={chosenDate} />
+            <Uploader handleImgs={this.handleImgs} handleDlt={this.handleDlt} chosenDate={chosenDate} />
           </div>
+          <div className="d-flex">
 
-          <Button
-            type="submit"
-            disabled={chosenDate === null || imgs === null ? true : false}
-          >
-            Submit
+            <Button
+              type="submit"
+              disabled={chosenDate === null || imgs === null ? true : false}
+            >
+              Next
           </Button>
+            {isLoading ? (
+              <LoadSpinner style={{ height: "70px", width: "80px" }} />
+            ) : null}
+          </div>
         </form>
 
-        <div className={!failedImgs.length && "d-none"}>
-          <h4>3. Failed images</h4>
-          <small>
-            We do not allow advertising of alcohol, weapons, tobacco-containing
-            products, NSFW content on our platform.
-          </small>
-          <p>These images will not be uploaded:</p>
-          {/* Images that did not pass moderation */}
-          <ThumbsContainer>{failedNails}</ThumbsContainer>
-        </div>
+        {failedImgs.length === 0 ? (
+          <div className={Loaded === 1 ? "" : "d-none"}>
+            <h4>3. Summary</h4>
+            <small>
+              Please confirm that the following details are correct before clicking on the 'Proceed' button. Should there be any changes required, please scroll up and make the changes and then click on the 'Next' button once again.
+                        </small>
+            <br />
+            <div>
+              Selected date     : <Moment format="YYYY/MM/DD">{chosenDate}</Moment>
+              <br />
+              Selected time slot: <Moment format="HH:mm">{chosenDate}</Moment>
+            </div>
+            <ThumbsContainer>{successNails}</ThumbsContainer>
+            <Button type="submit" onClick={this.handleProceed}>Proceed</Button>
+          </div>
+        )
+          : (
+            <div className={!failedImgs.length && "d-none"}>
+              <h4>3. Summary - Failed images</h4>
+              <small>
+                We do not allow advertising of alcohol, weapons,
+                tobacco-containing products, NSFW content on our platform.
+              </small>
+              <p>These images will not be uploaded:</p>
+              {/* Images that did not pass moderation */}
+              <ThumbsContainer>{failedNails}</ThumbsContainer>
+              <small>
+                Please make necessary changes and then click on the Next button
+                again.
+              </small>
+            </div>
+          )}
+        <div
+          style={{ float: "left", clear: "both" }}
+          ref={el => {
+            this.pageEnd = el;
+          }}
+        />
       </div>
     );
   }

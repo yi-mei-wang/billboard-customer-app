@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import { Redirect } from "react-router-dom";
 import { Route, Switch, Link } from "react-router-dom";
 import styled from "styled-components";
@@ -7,15 +6,21 @@ import BottomBar from "../components/Bottom";
 import ExpiredAds from "../components/Ads/ExpiredAds";
 import NewAd from "../components/Ads/NewAd";
 import ScheduledAds from "../components/Ads/ScheduledAds";
-import Selection from "../components/Ads/Selection";
-import Summary from "../components/Ads/Summary";
-import WithCall from "../components/WithCall";
+import ExpiredAds from "../components/Ads/ExpiredAds";
+import BottomBar from "../components/Bottom";
+import SideBar from "../components/SideBar";
+import Mes from "../components/Mes";
+
 
 const Main = styled.div`
   margin-bottom: 70px;
 `;
 
 class Homepage extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const { history, currentUser } = this.props;
     if (!currentUser) return <Redirect to="/login" />;
@@ -25,6 +30,8 @@ class Homepage extends React.Component {
     return (
       <>
         {/* <Navbar history={history} removeUser={this.props.removeUser} /> */}
+        <SideBar history={history} removeUser={this.props.removeUser} />
+
         <Main>
           <Switch>
             <Route
@@ -41,6 +48,11 @@ class Homepage extends React.Component {
               exact
               path="/expired"
               component={props => <ExpiredAds {...props} />}
+            />
+            <Route
+              exact
+              path="/mes"
+              component={props => <Mes {...props} />}
             />
           </Switch>
 
