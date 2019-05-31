@@ -56,8 +56,8 @@ class Uploader extends Component {
     let id = e.target.id;
     const copy = this.state.imgs;
     this.setState({
-      imgs: copy.filter(file => file.name !== id)  //remove using this
-    })
+      imgs: copy.filter(file => file.name !== id) //remove using this
+    });
     this.props.handleDlt(id);
     // Pop the corresponding img from the state
   };
@@ -89,7 +89,7 @@ class Uploader extends Component {
         <Link
           id={file.name}
           onClick={this.deleteImg}
-          style={{ zIndex: 10, position: "relative" }}
+          style={{ position: "relative" }}
         >
           {" "}
           Delete image{" "}
