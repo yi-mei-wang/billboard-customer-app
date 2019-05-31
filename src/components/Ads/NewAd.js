@@ -235,16 +235,19 @@ class NewAd extends Component {
         </form>
 
         {failedImgs.length === 0 ? (
-          <div className={Loaded === 1 ? "" : "d-none"}>
+          <div
+            className={Loaded === 1 ? "" : "d-none"}
+            style={{ marginBottom: "50px" }}
+          >
             <h4>3. Summary</h4>
-            <small>
+            <small className={"m-3"}>
               Please confirm that the following details are correct before
               clicking on the 'Proceed' button. Should there be any changes
               required, please scroll up and make the changes and then click on
               the 'Next' button once again.
             </small>
             <br />
-            <div>
+            <div className={"m-2"}>
               Selected date : <Moment format="YYYY/MM/DD">{chosenDate}</Moment>
               <br />
               Selected time slot: <Moment format="HH:mm">{chosenDate}</Moment>
@@ -257,7 +260,7 @@ class NewAd extends Component {
         ) : (
           <div className={!failedImgs.length && "d-none"}>
             <h4>3. Summary - Failed images</h4>
-            <small className={"m-2"}>
+            <small className={"m-3"}>
               We do not allow advertising of alcohol, weapons,
               tobacco-containing products, NSFW content on our platform.
             </small>
