@@ -25,7 +25,12 @@ class Selection extends React.Component {
               <CardText>
                 Advertise with us to see your content on our billboards.
               </CardText>
-              <Button onClick={() => history.push("/new")}>NEW ADS</Button>
+              <Button
+                onClick={() => history.push("/new")}
+                style={{ color: "#d79922" }}
+              >
+                NEW ADS
+              </Button>
             </Card>
           </Col>
           <Col sm="12">
@@ -34,7 +39,10 @@ class Selection extends React.Component {
                 <CardTitle>SCHEDULED ADS</CardTitle>
               </h5>{" "}
               <CardText>Ads that have been approved.</CardText>
-              <Button onClick={() => history.push("/scheduled")}>
+              <Button
+                onClick={() => history.push("/scheduled")}
+                style={{ color: "#d79922" }}
+              >
                 SCHEDULED ADS
               </Button>
             </Card>
@@ -47,7 +55,10 @@ class Selection extends React.Component {
               <CardText>
                 Ads that were approved and advertised in the past.
               </CardText>
-              <Button onClick={() => history.push("/expired")}>
+              <Button
+                onClick={() => history.push("/expired")}
+                style={{ color: "#d79922" }}
+              >
                 EXPIRED ADS
               </Button>
             </Card>
