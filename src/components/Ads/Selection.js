@@ -27,7 +27,13 @@ class Selection extends React.Component {
               </CardText>
               <Button
                 onClick={() => history.push("/new")}
-                style={{ backgroundColor: "#d79922" }}
+                style={{
+                  backgroundColor: "#d79922",
+                  color: "white",
+                  border: "none",
+                  letterSpacing: "1.5px",
+                  fontWeight: 600
+                }}
               >
                 NEW ADS
               </Button>
@@ -41,7 +47,13 @@ class Selection extends React.Component {
               <CardText>Ads that have been approved.</CardText>
               <Button
                 onClick={() => history.push("/scheduled")}
-                style={{ backgroundColor: "#d79922" }}
+                style={{
+                  backgroundColor: "#d79922",
+                  color: "white",
+                  border: "none",
+                  letterSpacing: "1.5px",
+                  fontWeight: 600
+                }}
               >
                 SCHEDULED ADS
               </Button>
@@ -57,7 +69,13 @@ class Selection extends React.Component {
               </CardText>
               <Button
                 onClick={() => history.push("/expired")}
-                style={{ backgroundColor: "#d79922" }}
+                style={{
+                  backgroundColor: "#d79922",
+                  color: "white",
+                  border: "none",
+                  letterSpacing: "1.5px",
+                  fontWeight: 600
+                }}
               >
                 EXPIRED ADS
               </Button>
