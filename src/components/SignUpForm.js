@@ -8,7 +8,7 @@ import {
   FormText,
   Input
 } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Axios from "axios";
 import { DOMAIN_URL } from "../constants";
 
@@ -58,6 +58,7 @@ class SignUpModal extends React.Component {
             localStorage.setItem("id", response.data.user.id);
             localStorage.setItem("username", response.data.user.username);
             this.props.setUser(response.data.user);
+            this.props.history.push("/");
             break;
           case 4091:
             console.log("Username taken");
@@ -199,4 +200,4 @@ class SignUpModal extends React.Component {
   }
 }
 
-export default SignUpModal;
+export default withRouter(SignUpModal);
