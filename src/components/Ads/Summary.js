@@ -51,6 +51,8 @@ class Summary extends React.Component {
       })
       .then(response => {
         console.log(response);
+        console.log(response.data);
+        console.log("adofjasd");
         this.setState({
           orders: response.data[0],
           images: response.data[0].images

@@ -50,6 +50,7 @@ class Homepage extends React.Component {
               component={props => <ExpiredAds {...props} />}
             />
             <Route
+              exact
               path="/:id"
               component={props => (
                 <Summary {...props} orderId={props.match.params.id} />
