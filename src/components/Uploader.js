@@ -106,7 +106,7 @@ class Uploader extends Component {
           maxSize={maxSize}
           style={{ height: "300px", marginBotton: "20px" }}
           // Check for the number of images in the state, if more than 12 disable the thing
-          disabled={imgs.length > 11 && true}
+          disabled={imgs.length > 1 && true}
         >
           {({
             getRootProps,
@@ -128,7 +128,7 @@ class Uploader extends Component {
                   {!isDragActive && (
                     <>
                       <p>Click here or drop a file to upload! </p>
-                      <small>Maximum 12 images allowed.</small>
+                      {/* <small>Maximum 12 images allowed.</small> */}
                     </>
                   )}
                   {isDragActive && !isDragReject && "Drop it like it's hot!"}
