@@ -53,6 +53,12 @@ class SignUpModal extends React.Component {
       .then(response => {
         console.log(response);
         switch (response.data.status) {
+          case 200:
+            localStorage.setItem("jwt", response.data.auth_token);
+            localStorage.setItem("id", response.data.user.id);
+            localStorage.setItem("username", response.data.user.username);
+            this.props.setUser(response.data.user);
+            break;
           case 4091:
             console.log("Username taken");
             this.setState({
@@ -64,11 +70,6 @@ class SignUpModal extends React.Component {
             this.setState({
               invalidEmail: true
             });
-            break;
-          case 200:
-            localStorage.setItem("jwt", response.data.auth_token);
-            localStorage.setItem("id", response.data.user.id);
-            this.props.setUser(response.data.user);
             break;
         }
       })

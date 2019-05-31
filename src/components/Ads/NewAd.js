@@ -8,8 +8,6 @@ import { DOMAIN_URL } from "../../constants";
 import LoadSpinner from "../LoadSpinner.js";
 import Moment from "react-moment";
 
-const server = "https://billboard-automated-server-1.herokuapp.com";
-
 const Button = styled.button`
   background-color: white;
   color: palevioletred;
@@ -93,7 +91,7 @@ class NewAd extends Component {
     const { order_id } = this.state;
     axios({
       method: "POST",
-      url: `${server}/api/v1/orders/verify`,
+      url: `${DOMAIN_URL}/api/v1/orders/verify`,
       data: {
         order_id
       }
