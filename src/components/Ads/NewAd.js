@@ -206,7 +206,7 @@ class NewAd extends Component {
           }}
         />
         <form onSubmit={this.handleSubmit} className={"mx-auto"}>
-          <h4>1. Select a time and date</h4>
+          <h4>1. Select a date and time</h4>
           <div className="row p-3 mx-auto">
             <div className={"col-12 col-md-3 my-3 p-2 mx-auto text-center"}>
               <Calendar handleDate={this.handleDate} />
