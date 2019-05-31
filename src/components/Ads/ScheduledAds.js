@@ -37,7 +37,7 @@ class ScheduledAds extends React.Component {
       <>
         <tr key={index}>
           <td>
-            <Link to={`orders/${order.order_id}`}>{order.order_id} </Link>
+            <Link to={`orders/${order.order_id}`}> {order.order_id} </Link>
           </td>
           <td>
             <Moment format="YYYY/MM/DD">{order.start_time}</Moment>
