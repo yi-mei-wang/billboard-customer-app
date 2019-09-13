@@ -119,14 +119,6 @@ class LoginModal extends React.Component {
             }
             onClick={() => {
               this.handleLogin();
-              console.log(
-                "Username: " +
-                  this.state.username +
-                  "\n" +
-                  "Password: " +
-                  this.state.password +
-                  "\n"
-              );
             }}
           >
             Login

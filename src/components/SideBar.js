@@ -39,7 +39,6 @@ class SideBar extends React.Component {
   render() {
     const { users, isSelf } = this.props;
     const { collapsed } = this.state;
-    console.log(isSelf);
     const handleSelection = e => {
       this.props.history.push("/");
     };

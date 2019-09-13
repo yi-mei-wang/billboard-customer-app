@@ -53,7 +53,6 @@ class Calendar extends Component {
       .get(`${DOMAIN_URL}/api/v1/timeslots/show?d=${d}&m=${m}&y=${y}`)
 
       .then(result => {
-        console.log("axios");
         let slotsTaken = result.data.slotsTaken.map(slot => {
           return new Date(slot);
         });

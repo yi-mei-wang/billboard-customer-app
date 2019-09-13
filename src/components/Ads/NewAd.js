@@ -112,7 +112,7 @@ class NewAd extends Component {
         }
       })
       .catch((error, response) => {
-        console.log("hel", response);
+        console.log(response);
         console.log(error);
       });
   };
@@ -155,8 +155,6 @@ class NewAd extends Component {
         let errors = response.data.errors;
 
         for (let i = 0; i < Object.keys(errors).length; i++) {
-          console.log(errors[i]);
-          console.log(errors[i].length);
           // If the index of the error has a length, image with the corresponding index has failed
           if (errors[i].length) {
             failedCopy.push(imgCopy[i]);
@@ -258,24 +256,24 @@ class NewAd extends Component {
             </Button>
           </div>
         ) : (
-          <div
-            className={!failedImgs.length && "d-none"}
-            style={{ marginBottom: "100px" }}
-          >
-            <h4>3. Summary - Failed images</h4>
-            <small className={"m-3"}>
-              We do not allow advertising of alcohol, weapons,
-              tobacco-containing products, NSFW content on our platform.
+            <div
+              className={!failedImgs.length && "d-none"}
+              style={{ marginBottom: "100px" }}
+            >
+              <h4>3. Summary - Failed images</h4>
+              <small className={"m-3"}>
+                We do not allow advertising of alcohol, weapons,
+                tobacco-containing products, NSFW content on our platform.
             </small>
-            <p className={"m-2"}>These images will not be uploaded:</p>
-            {/* Images that did not pass moderation */}
-            <ThumbsContainer>{failedNails}</ThumbsContainer>
-            <small>
-              Please make necessary changes and then click on the Next button
-              again.
+              <p className={"m-2"}>These images will not be uploaded:</p>
+              {/* Images that did not pass moderation */}
+              <ThumbsContainer>{failedNails}</ThumbsContainer>
+              <small>
+                Please make necessary changes and then click on the Next button
+                again.
             </small>
-          </div>
-        )}
+            </div>
+          )}
         <div
           style={{ float: "left", clear: "both" }}
           ref={el => {

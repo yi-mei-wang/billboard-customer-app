@@ -17,7 +17,6 @@ const WithCall = WrappedComponent =>
           headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => {
-          console.log("helo", response.data);
           this.setState({
             orders: response.data
           });

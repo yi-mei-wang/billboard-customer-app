@@ -75,7 +75,7 @@ class SignUpModal extends React.Component {
         }
       })
       .catch((error, response) => {
-        console.log("hel", response);
+        console.log(response);
         console.log(error);
       });
   };
@@ -156,8 +156,8 @@ class SignUpModal extends React.Component {
               {this.state.password === this.state.confirmPassword ? (
                 <br />
               ) : (
-                <FormText color="danger">Passwords do not match</FormText>
-              )}
+                  <FormText color="danger">Passwords do not match</FormText>
+                )}
             </Col>
           </FormGroup>
         </Form>
@@ -171,25 +171,12 @@ class SignUpModal extends React.Component {
             color="primary"
             disabled={Boolean(
               this.state.username === "" ||
-                this.state.email === "" ||
-                this.state.password === "" ||
-                this.state.confirmPassword === ""
+              this.state.email === "" ||
+              this.state.password === "" ||
+              this.state.confirmPassword === ""
             )}
             onClick={() => {
               this.handleSignUp();
-              console.log(
-                "Username: " +
-                  this.state.username +
-                  "\n" +
-                  "Email: " +
-                  this.state.email +
-                  "\n" +
-                  "Password: " +
-                  this.state.password +
-                  "\n" +
-                  "Confirm Password: " +
-                  this.state.confirmPassword
-              );
             }}
           >
             Sign Up
