@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "./images/adlogo1.png";
+import logo from "./images/adlogo.png";
 
 const Button = styled.button`
   text-align: center;
