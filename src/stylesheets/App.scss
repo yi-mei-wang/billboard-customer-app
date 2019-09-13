@@ -6,7 +6,7 @@ $scondary: #4056a1;
 
 body {
   line-height: 1.2rem;
-  font-family: "Roboto", "Open Sans", sans-serif !important;
+  font-family: "Slabo 27px", serif !important;
   font-size: 1rem;
   font-weight: 200;
   text-rendering: optimizeLegibility;
@@ -49,8 +49,11 @@ button {
   border-radius: 0 !important;
 }
 
-h2 {
+h1, h2 {
   font-family: "Staatliches", "Open Sans", sans-serif;
+}
+
+h2{
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
 }
 
@@ -59,15 +62,15 @@ h4 {
 }
 
 .bg-scondary {
-  background-color: $scondary;
+  background-color: black;
 }
 
 a {
   color: #00ab50;
-}
 
-a:hover {
-  color: #f13c20;
+  &:hover {
+    color: #f13c20;
+  }
 }
 
 .centerPiece {
