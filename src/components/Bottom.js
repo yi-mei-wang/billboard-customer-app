@@ -2,7 +2,7 @@ import React from "react";
 import { ReactComponent as AddSvg } from "../images/add.svg";
 import { ReactComponent as PastAds } from "../images/list.svg";
 import { ReactComponent as FutureAds } from "../images/calendar.svg";
-import { Bottom, AddButton, AddButtonContainer, Button, NavLinks } from "./atoms"
+import { Bottom, BottomContainer, AddButton, AddButtonBackground, Button, NavLinks } from "./atoms"
 
 
 const BottomBar = ({ history }) => {
@@ -17,24 +17,29 @@ const BottomBar = ({ history }) => {
   };
   return (
     <>
-      <Bottom className={"px-5"}>
-        <Button>
-          <PastAds onClick={handleExpired} />
-          <small className="mt-1 text-center">Past Ads</small>
-        </Button>
+      <BottomContainer>
+        <Bottom className={"px-5"}>
+          <Button>
+            <PastAds onClick={handleExpired} />
+            <small className="mt-1 text-center">Past Ads</small>
+          </Button>
 
-        <Button>
-          <FutureAds onClick={handleScheduled} style={{ zIndex: 10 }} />
-          <small className="mt-1 text-center">Future Ads</small>
-        </Button>
-      </Bottom>
+          <Button>
+            <FutureAds onClick={handleScheduled} style={{ zIndex: 10 }} />
+            <small className="mt-1 text-center">Future Ads</small>
+          </Button>
+        </Bottom>
+      </BottomContainer>
 
-      <AddButtonContainer />
+
+      <AddButtonBackground />
       <AddButton>
         <AddSvg onClick={handleNew} />
       </AddButton>
+      <small className="mt-1 text-center" style={{ "color": "white", "position": "fixed", "bottom": "14px", "left": "50%", "transform": "translate(-50%,0)" }}>New Ad</small>
 
     </>
+
   );
 };
 

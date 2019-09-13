@@ -8,14 +8,23 @@ display: inline-block;
 margin-bottom: 0.5rem;
 `
 
+const BottomContainer = styled.div`
+  width: 100vw;
+  height: 90px;
+  background-color: #3b4158;
+  border-radius: 10px 10px 0px 0px;
+  position: fixed;
+  bottom: 0;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+`;
+
 const Bottom = styled.div`
   width: 100vw;
-  height: 200px;
+  height: 80px;
   background-color: #3b4158;
   color: white;
   position: fixed;
   bottom: 0;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
 
   display: flex;
   justify-content: space-between;
@@ -28,11 +37,11 @@ const Bottom = styled.div`
   }
 `;
 
-const AddButtonContainer = styled.div`
+const AddButtonBackground = styled.div`
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  bottom: 25px;
+  bottom: 46px;
   background-color: white;
   margin-right: auto;
   margin-left: auto;
@@ -50,7 +59,7 @@ const AddButton = styled.div`
   margin-left: auto;
   position: fixed;
   left: 50%;
-  bottom: 29px;
+  bottom: 50px;
   transform: translate(-50%, 0);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   z-index: 1;
@@ -128,4 +137,4 @@ const Button = styled.button`
   }
 `;
 
-export { Underline, Bottom, AddButton, AddButtonContainer, Button, NavLinks };
+export { Underline, Bottom, BottomContainer, AddButton, AddButtonBackground, Button, NavLinks };
