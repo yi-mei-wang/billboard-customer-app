@@ -17,6 +17,9 @@ const Main = styled.div`
   // padding-top: 50px;
   background-image: url(${background});
   background-size: 100vw;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
   height: 100vh;
 `;
 
