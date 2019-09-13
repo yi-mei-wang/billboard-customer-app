@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Moment from "react-moment";
 import { DOMAIN_URL } from "../../constants";
+import { Underline } from "../atoms"; 
 
 const ThumbsContainer = styled.aside`
   display: flex;
@@ -73,15 +74,7 @@ class Summary extends React.Component {
     return (
       <div className={"px-4"}>
         <h2 className={"pt-4 m-0"}>Order {orders.order_id}</h2>
-        <span
-          className={"underline mb-2"}
-          style={{
-            backgroundColor: "#ffbf00",
-            width: "200px",
-            height: "10px",
-            display: "inline-block"
-          }}
-        />
+<Underline/>
 
         <p>
           Selected date :{" "}

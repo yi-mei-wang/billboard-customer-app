@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Moment from "react-moment";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import Calendar from "../Calendar";
 import Uploader from "../Uploader";
-import { Redirect } from "react-router-dom";
+import LoadSpinner from "../LoadSpinner";
 import { DOMAIN_URL } from "../../constants";
-import LoadSpinner from "../LoadSpinner.js";
-import Moment from "react-moment";
+import { Underline } from "../atoms"; 
 
 const Button = styled.button`
   background-color: white;
   color: palevioletred;
-
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
@@ -194,15 +194,7 @@ class NewAd extends Component {
     return (
       <div className={"px-4 mb-5"}>
         <h2 className={"pt-4 m-0"}>New ADs</h2>
-        <span
-          className={"underline mb-2"}
-          style={{
-            backgroundColor: "#ffbf00",
-            width: "200px",
-            height: "10px",
-            display: "inline-block"
-          }}
-        />
+<Underline/>
         <form onSubmit={this.handleSubmit} className={"mx-auto"}>
           <h4>1. Select a date and time</h4>
           <div className="row p-3 mx-auto">
