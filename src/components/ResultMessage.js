@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import success from './images/Check-Mark-Icon-3.png'
 import failed from './images/Failed-Icon-3.png'
 
-class Mes extends Component {
+class ResultMessage extends Component {
     constructor(props) {
         super(props);
     }
@@ -12,13 +12,13 @@ class Mes extends Component {
             <>
                 {
                     this.props.location.state.response === 'Success' ?
-                        <img src={success} className='centerPiece' />
+                        <img src={success} className='centerPiece' alt="success message" />
                         :
-                        <img src={failed} className='centerPiece' />
+                        <img src={failed} className='centerPiece' alt="failure message" />
                 }
             </>
         )
     }
 }
 
-export default Mes;
+export default ResultMessage;

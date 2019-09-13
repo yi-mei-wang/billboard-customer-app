@@ -4,7 +4,7 @@ import { Route, Switch, Link } from "react-router-dom";
 import styled from "styled-components";
 import BottomBar from "../components/Bottom";
 import ExpiredAds from "../components/Ads/ExpiredAds";
-import Mes from "../components/Mes";
+import ResultMessage from "../components/ResultMessage";
 import Navbar from "../components/Navbar";
 import NewAd from "../components/Ads/NewAd";
 import ScheduledAds from "../components/Ads/ScheduledAds";
@@ -13,7 +13,8 @@ import SideBar from "../components/SideBar";
 import Summary from "../components/Ads/Summary";
 
 const Main = styled.div`
-  margin-bottom: 70px;
+  margin-bottom: 100px;
+  background-url: url()
 `;
 
 class Homepage extends React.Component {
@@ -49,7 +50,7 @@ class Homepage extends React.Component {
               path="/expired"
               component={props => <ExpiredAds {...props} />}
             />
-            <Route exact path="/mes" component={props => <Mes {...props} />} />
+            <Route exact path="/result" component={props => <ResultMessage {...props} />} />
             <Route
               exact
               path="/:id"

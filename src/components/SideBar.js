@@ -1,11 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
-import logo from "./images/adlogo.png";
-import logo1 from "./images/adlogo1.png";
-
-const Logo = styled.h3`
-  font-family: "Staatliches", "open sans";
-`;
+import logo from "./images/adlogo1.png";
 
 const Button = styled.button`
   text-align: center;
@@ -37,7 +32,6 @@ class SideBar extends React.Component {
   };
 
   render() {
-    const { users, isSelf } = this.props;
     const { collapsed } = this.state;
     const handleSelection = e => {
       this.props.history.push("/");
@@ -56,11 +50,11 @@ class SideBar extends React.Component {
         </button>
         <div className="sidebar text-center d-flex flex-column align-items-center ">
           <img
-            src={logo1}
+            src={logo}
             style={{ width: "200px", marginBottom: "10px" }}
             onClick={handleSelection}
+            alt="Logo"
           />
-          {/* <img src={logo} style={{ width: "200px", marginBottom: "10px" }} onClick={handleSelection} /> */}
           <Welcome className={"mt-4"}> Welcome back,</Welcome>
           <Welcome className={"mb-4"}>
             <i>{username}!</i>
