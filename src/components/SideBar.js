@@ -34,7 +34,8 @@ class SideBar extends React.Component {
     const handleSelection = e => {
       this.props.history.push("/");
     };
-    const username = localStorage.getItem("username");
+    let username = localStorage.getItem("username");
+
     return (
       <div
         className="sidebar-container"
@@ -53,18 +54,22 @@ class SideBar extends React.Component {
             onClick={handleSelection}
             alt="Logo"
           />
-          <Welcome className={"mt-4"}> Welcome back,</Welcome>
-          <Welcome className={"mb-4"}>
-            <i>{username}!</i>
-          </Welcome>
-          <Button
-            className=""
-            onClick={() => {
-              this.props.removeUser();
-            }}
-          >
-            Log Out
-          </Button>
+          <Welcome className={"mt-4"}> {username !== null ? "Welcome back," : "Hello there!"}</Welcome>
+          {username !== null &&
+            <>
+              <Welcome className={"mb-4"}>
+                <i>{username}!</i>
+              </Welcome>
+              <Button
+                className=""
+                onClick={() => {
+                  this.props.removeUser();
+                }}
+              >
+                Log Out
+              </Button>
+            </>
+          }
         </div>
       </div>
     );

@@ -47,7 +47,7 @@ class Homepage extends React.Component {
   render() {
     const { history, currentUser } = this.props;
 
-    if (!currentUser) return <Redirect to="/login" />;
+    // if (!currentUser) return <Redirect to="/login" />;
 
     let Container =
       this.props.match.url === "/" ?
