@@ -3,22 +3,35 @@ import { Redirect } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import BottomBar from "../components/Bottom";
-import ExpiredAds from "../components/Ads/ExpiredAds";
+import ExpiredAds from "../components/ads/ExpiredAds";
 import ResultMessage from "../components/ResultMessage";
+import NewAd from "../components/ads/NewAd";
+import ScheduledAds from "../components/ads/ScheduledAds";
+import Selection from "../components/ads/Selection";
+import Summary from "../components/ads/Summary";
 import Navbar from "../components/Navbar";
-import NewAd from "../components/Ads/NewAd";
-import ScheduledAds from "../components/Ads/ScheduledAds";
-import Selection from "../components/Ads/Selection";
 import SideBar from "../components/SideBar";
-import Summary from "../components/Ads/Summary";
-import background from "../components/images/background.jpg"
+import background from "../images/background.jpg"
 
 const Main = styled.div`
-  // padding-bottom: 100px;
+  // padding-top: 50px;
   background-image: url(${background});
   background-size: 100vw;
+  height: 100vh;
 `;
 
+const CallToAction = styled.div`
+  // background-color: #3b4158;
+  color: #fff;
+  padding: 1.5rem;
+  padding-right: 50px;
+`;
+
+const Heading = styled.h1`
+  background-color: #3b4158;
+  padding: 2px;
+  display: inline;
+`;
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
@@ -26,9 +39,18 @@ class Homepage extends React.Component {
 
   render() {
     const { history, currentUser } = this.props;
+
     if (!currentUser) return <Redirect to="/login" />;
+
     let Container =
-      this.props.match.url === "/" ? <Selection history={history} /> : <h1 />;
+      this.props.match.url === "/" ?
+        // <Selection history={history} /> 
+        <CallToAction>
+          <Heading>Reach out to your audience today!</Heading>
+          <h3>Schedule an ad with us now.</h3>
+        </CallToAction>
+        :
+        <h1 />;
 
     return (
       <>
@@ -63,6 +85,8 @@ class Homepage extends React.Component {
           </Switch>
 
           {Container}
+
+
           <BottomBar history={history} />
         </Main>
       </>
