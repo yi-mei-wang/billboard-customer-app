@@ -26,5 +26,9 @@
     border: none;
     color: #474350;
     // top: 90px;
+
+    &:focus {
+      outline: 0;
+    }
   }
 }
