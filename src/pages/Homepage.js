@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import BottomBar from "../components/Bottom";
 import ExpiredAds from "../components/Ads/ExpiredAds";
@@ -11,10 +11,12 @@ import ScheduledAds from "../components/Ads/ScheduledAds";
 import Selection from "../components/Ads/Selection";
 import SideBar from "../components/SideBar";
 import Summary from "../components/Ads/Summary";
+import background from "../components/images/background.jpg"
 
 const Main = styled.div`
-  margin-bottom: 100px;
-  background-url: url()
+  // padding-bottom: 100px;
+  background-image: url(${background});
+  background-size: 100vw;
 `;
 
 class Homepage extends React.Component {
