@@ -21,7 +21,6 @@ const Main = styled.div`
 `;
 
 const CallToAction = styled.div`
-  // background-color: #3b4158;
   color: #fff;
   padding: 1.5rem;
   padding-right: 50px;
@@ -29,9 +28,14 @@ const CallToAction = styled.div`
 
 const Heading = styled.h1`
   background-color: #3b4158;
-  padding: 2px;
-  display: inline;
+  display: inline-block;
 `;
+
+const Subheading = styled.h3`
+  background-color: white;
+  color: #3b4158;
+`;
+
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
@@ -46,8 +50,9 @@ class Homepage extends React.Component {
       this.props.match.url === "/" ?
         // <Selection history={history} /> 
         <CallToAction>
-          <Heading>Reach out to your audience today!</Heading>
-          <h3>Schedule an ad with us now.</h3>
+          <Heading className="my-1 p-2">Reach out to</Heading>
+          <Heading className="p-2"> your audience today!</Heading>
+          <Subheading className="my-2 p-2">Schedule an ad with us now.</Subheading>
         </CallToAction>
         :
         <h1 />;
@@ -85,7 +90,6 @@ class Homepage extends React.Component {
           </Switch>
 
           {Container}
-
 
           <BottomBar history={history} />
         </Main>
