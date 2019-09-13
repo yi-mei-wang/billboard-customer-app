@@ -7,8 +7,6 @@ const Button = styled.button`
   color: #474350;
   background-color: #d79922;
   border: none;
-  /* display: flex;
-  justify-content: flex-start; */
   height: 30px;
   width: 100px;
 `;
